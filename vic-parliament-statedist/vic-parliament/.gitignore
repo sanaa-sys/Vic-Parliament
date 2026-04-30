@@ -1,0 +1,5 @@
+node_modules/
+server/.env
+client/dist/
+client/public/data.js
+.DS_Store
