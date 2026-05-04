@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build output — Vercel regenerates this on every deploy
+client/dist/
+
+# Local secrets — set GROQ_API_KEY in Vercel dashboard instead
+server/.env
+.env
+.env.local
+
+# OS / editor
+.DS_Store
+*.swp
