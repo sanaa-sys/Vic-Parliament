@@ -119,7 +119,7 @@ export default function SuburbPicker({ postcode, electorateSuburbs, onSelect }) 
       const layer = L.geoJSON(feature, {
         style: {
           fillColor:   colour.fill,
-          fillOpacity: 0.55,
+          fillOpacity: 0.85,
           color:       colour.border,
           weight:      3,
           opacity:     0.9,
@@ -142,7 +142,7 @@ export default function SuburbPicker({ postcode, electorateSuburbs, onSelect }) 
     if (!mapReady) return;
     Object.entries(layersRef.current).forEach(([name, { layer }]) => {
       layer.setStyle({
-        fillOpacity: name === selected ? 0.80 : 0.55,
+        fillOpacity: name === selected ? 0.99 : 0.85,
         weight:      name === selected ? 4    : 2,
       });
     });
