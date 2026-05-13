@@ -65,6 +65,7 @@ export default function Step4({ selection, email, onBack }) {
     const role = m.chamber === 'senate'   ? 'Senator'
                : m.chamber === 'assembly' ? 'State Assembly'
                : m.chamber === 'council'  ? 'State Council'
+               : m.chamber === 'lga'      ? `${m.council || 'Local Council'} Mayor`
                : 'Federal Representative';
     return `${m.name} — ${role} · ${m.party}`;
   });

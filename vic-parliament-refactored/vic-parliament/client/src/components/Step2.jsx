@@ -4,7 +4,8 @@ import MemberRow from './MemberRow';
 
 export default function Step2({ lookup, onNext, onBack }) {
   const { postcode, division, district, region,
-          federalRep, senators, assemblyMember, councilMembers } = lookup;
+          federalRep, senators, assemblyMember, councilMembers,
+          council, ward, councilInfo } = lookup;
 
   // Selection state
   const [repSel,      setRepSel]      = useState(true);
@@ -15,6 +16,7 @@ export default function Step2({ lookup, onNext, onBack }) {
   const [councilSel,  setCouncilSel]  = useState(
     () => Object.fromEntries(councilMembers.map(m => [m.email, true]))
   );
+  const [lgaSel, setLgaSel] = useState(true);   // local council (mayor/CEO)
 
   function toggleSen(id) {
     setSenSel(prev => ({ ...prev, [id]: !prev[id] }));
@@ -35,13 +37,27 @@ export default function Step2({ lookup, onNext, onBack }) {
     senators.forEach(s => { if (senSel[s.member_id])  selected.push(s); });
     if (asmSel && assemblyMember) selected.push(assemblyMember);
     councilMembers.forEach(m => { if (councilSel[m.email]) selected.push(m); });
-    onNext({ selected, repSel, senSel, asmSel, councilSel });
+    // Local council — add as contact target if selected and has email
+    if (lgaSel && councilInfo?.email) {
+      selected.push({
+        name:    councilInfo.mayor || councilInfo.name,
+        email:   councilInfo.email,
+        phone:   councilInfo.phone || '',
+        party:   '',
+        chamber: 'lga',
+        council: council,
+        ward:    ward || '',
+        website: councilInfo.website || '',
+      });
+    }
+    onNext({ selected, repSel, senSel, asmSel, councilSel, lgaSel });
   }
 
   const descParts = [];
   if (division) descParts.push(`Federal: ${division}`);
   if (district) descParts.push(`Assembly: ${district}`);
   if (region)   descParts.push(`Council: ${region}`);
+  if (council)  descParts.push(`Local: ${council}${ward ? `, ${ward} Ward` : ''}`);
 
   return (
     <div>
@@ -143,6 +159,60 @@ export default function Step2({ lookup, onNext, onBack }) {
           </div>
         )}
       </div>
+
+      {/* Local Council (LGA) */}
+      {council && councilInfo && (
+        <>
+          <div className="label" style={{ marginBottom: 8 }}>
+            Local Council
+          </div>
+          <div className="card" style={{ marginBottom: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 10 }}>
+              <input
+                type="checkbox" checked={lgaSel}
+                onChange={e => setLgaSel(e.target.checked)}
+                style={{ marginTop: 2 }}
+              />
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--color-text)' }}>
+                  {council}
+                  {ward && ward !== 'Unsubdivided' && (
+                    <span style={{
+                      marginLeft: 8, fontSize: 11, fontWeight: 500,
+                      background: 'var(--color-bg-secondary)',
+                      border: '0.5px solid var(--color-border)',
+                      borderRadius: 12, padding: '2px 8px',
+                      color: 'var(--color-text-secondary)',
+                    }}>
+                      {ward} Ward
+                    </span>
+                  )}
+                </div>
+                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 4 }}>
+                  Mayor: {councilInfo.mayor}
+                </div>
+                {councilInfo.phone && (
+                  <div style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                    Phone: <a href={`tel:${councilInfo.phone}`} style={{ color: 'var(--color-accent)' }}>{councilInfo.phone}</a>
+                  </div>
+                )}
+                {councilInfo.email && (
+                  <div style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                    Email: <a href={`mailto:${councilInfo.email}`} style={{ color: 'var(--color-accent)' }}>{councilInfo.email}</a>
+                  </div>
+                )}
+                {councilInfo.website && (
+                  <div style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                    <a href={councilInfo.website} target="_blank" rel="noreferrer" style={{ color: 'var(--color-accent)' }}>
+                      {councilInfo.website.replace('https://','').replace('http://','')}
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       <div className="btns">
         <button className="btn" onClick={onBack}>← Back</button>

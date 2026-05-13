@@ -6,14 +6,10 @@ import { getTemplateFallback } from '../data/templates';
 function getRoleSalutation(member) {
   if (!member) return 'Dear Member,';
   const chamber = member.chamber || '';
-  const party   = member.party   || '';
-
-  if (chamber === 'senate') return 'Dear Senator,';
-  if (chamber === 'assembly' || chamber === 'council') {
-    // Check if they hold a ministerial title
-    return 'Dear Member of Parliament,';
-  }
-  // Federal house
+  if (chamber === 'senate')   return 'Dear Senator,';
+  if (chamber === 'assembly') return 'Dear Member of the Legislative Assembly,';
+  if (chamber === 'council')  return 'Dear Member of the Legislative Council,';
+  if (chamber === 'lga')      return `Dear Mayor,`;
   return 'Dear Member of Parliament,';
 }
 
@@ -24,6 +20,7 @@ function getPrimaryRole(member) {
   if (chamber === 'senate')   return 'Senator';
   if (chamber === 'assembly') return 'Member of the Legislative Assembly';
   if (chamber === 'council')  return 'Member of the Legislative Council';
+  if (chamber === 'lga')      return `Mayor of ${member.council || 'Council'}`;
   return 'Federal Representative';
 }
 
