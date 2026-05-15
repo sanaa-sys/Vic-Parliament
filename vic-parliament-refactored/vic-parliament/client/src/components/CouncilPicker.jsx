@@ -124,9 +124,17 @@ export default function CouncilPicker({ postcode, councilWardMap, councilData, o
                   <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--color-text)' }}>
                     {council}
                   </div>
-                  {info?.mayor && (
+                  {info?.website && (
                     <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>
-                      {info.mayorTitle || 'Mayor'}: {info.mayor}
+                      <a
+                        href={info.mayorPage || info.website}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ color: 'var(--color-accent)' }}
+                        onClick={e => e.stopPropagation()}
+                      >
+                        Find current mayor →
+                      </a>
                     </div>
                   )}
                 </div>
@@ -151,10 +159,7 @@ export default function CouncilPicker({ postcode, councilWardMap, councilData, o
                     display: 'grid', gridTemplateColumns: 'auto 1fr',
                     gap: '5px 14px', alignItems: 'start',
                   }}>
-                    {info.ceo && (<>
-                      <span style={{ color: 'var(--color-text-secondary)', whiteSpace: 'nowrap' }}>CEO</span>
-                      <span>{info.ceo}</span>
-                    </>)}
+
                     {info.phone && (<>
                       <span style={{ color: 'var(--color-text-secondary)', whiteSpace: 'nowrap' }}>Phone</span>
                       <a href={`tel:${info.phone.replace(/\s/g,'')}`} style={{ color: 'var(--color-accent)' }}>{info.phone}</a>

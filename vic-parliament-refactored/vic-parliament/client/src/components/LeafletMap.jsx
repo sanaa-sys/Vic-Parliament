@@ -139,7 +139,7 @@ export default function LeafletMap({
       const layer = L.geoJSON(geojson, {
         style: {
           fillColor:   colour.fill,
-          fillOpacity: 0.55,
+          fillOpacity: 0.80,
           color:       colour.border,
           weight:      3,
           opacity:     0.9,
@@ -193,7 +193,7 @@ export default function LeafletMap({
     Object.entries(layersRef.current).forEach(([name, { layer, colour }]) => {
       try {
         layer.setStyle({
-          fillOpacity: name === selected ? 0.80 : 0.55,
+          fillOpacity: name === selected ? 0.90: 0.80,
           weight:      name === selected ? 4    : 3,
         });
       } catch (_) {}

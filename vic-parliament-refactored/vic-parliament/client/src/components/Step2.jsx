@@ -188,9 +188,7 @@ export default function Step2({ lookup, onNext, onBack }) {
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 4 }}>
-                  Mayor: {councilInfo.mayor}
-                </div>
+
                 {councilInfo.phone && (
                   <div style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
                     Phone: <a href={`tel:${councilInfo.phone}`} style={{ color: 'var(--color-accent)' }}>{councilInfo.phone}</a>
