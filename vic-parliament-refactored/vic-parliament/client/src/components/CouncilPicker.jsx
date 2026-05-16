@@ -124,19 +124,7 @@ export default function CouncilPicker({ postcode, councilWardMap, councilData, o
                   <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--color-text)' }}>
                     {council}
                   </div>
-                  {info?.website && (
-                    <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 2 }}>
-                      <a
-                        href={info.mayorPage || info.website}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{ color: 'var(--color-accent)' }}
-                        onClick={e => e.stopPropagation()}
-                      >
-                        Find current mayor →
-                      </a>
-                    </div>
-                  )}
+
                 </div>
                 {isAmbiguous && (
                   <div style={{
