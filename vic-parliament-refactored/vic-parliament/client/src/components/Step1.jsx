@@ -2,7 +2,7 @@
 // Postcode entry + disambiguation stages:
 //   Stage 1: Federal electorate picker  (if spans multiple federal divisions)
 //   Stage 2: State Assembly district picker (if spans multiple districts)
-//   Stage 3: Council / ward picker (always shown — may span multiple councils)
+//   Stage 3: Council / ward picker (only shown when postcode spans multiple councils)
 
 import { useState, useEffect } from 'react';
 import { isDataLoaded, lookupPostcode } from '../hooks/useMembers';
@@ -26,7 +26,8 @@ const STAGE = { NONE: 'none', FEDERAL: 'federal', DISTRICT: 'district', COUNCIL:
 
 export default function Step1({ onNext }) {
   const [postcode, setPostcode] = useState('');
-  const [topic,    setTopic]    = useState('');
+  const [topic,       setTopic]       = useState('');
+  const [customTopic, setCustomTopic] = useState('');
   const [error,    setError]    = useState('');
   const [stage,    setStage]    = useState(STAGE.NONE);
   const [lookup,   setLookup]   = useState(null);
@@ -62,7 +63,12 @@ export default function Step1({ onNext }) {
     const result = lookupPostcode(postcode);
     if (!result) { setError(`Postcode ${postcode} not found.`); return; }
 
-    const baseLookup = { postcode, topic: topic || 'other', ...result };
+    // If user selected 'other' and typed a custom topic, use that as the topic
+    // The generate-email API falls back to raw string if not a known TOPIC_LABELS key
+    const effectiveTopic = (topic === 'other' && customTopic.trim())
+      ? customTopic.trim()
+      : topic || 'other';
+    const baseLookup = { postcode, topic: effectiveTopic, ...result };
     setLookup(baseLookup);
 
     // Determine first stage needed
@@ -82,6 +88,23 @@ export default function Step1({ onNext }) {
       .then(r => r.json())
       .then(data => {
         const cwMap = data[pc] || {};
+        const councilCount = Object.keys(cwMap).length;
+
+        // Only show the council picker if there are multiple councils
+        // For a single council, resolve it automatically and proceed
+        if (councilCount <= 1) {
+          const council = Object.keys(cwMap)[0] || null;
+          const info    = council ? (councilData?.[council] ?? {}) : {};
+          proceed({
+            ...(currentLookup),
+            council,
+            ward:          null,
+            councilInfo:   info,
+            councilWardMap: cwMap,
+          });
+          return;
+        }
+
         setCouncilWardMap(cwMap);
         setLookup(prev => ({ ...(prev || currentLookup), councilWardMap: cwMap }));
         setStage(STAGE.COUNCIL);
@@ -147,7 +170,7 @@ export default function Step1({ onNext }) {
     let n = 0;
     if (lookup?.divisions?.length > 1) n++;
     if (districtsList?.length > 1) n++;
-    n++; // council always shown
+    if (councilWardMap && Object.keys(councilWardMap).length > 1) n++;
     return n;
   })();
 
@@ -166,6 +189,13 @@ export default function Step1({ onNext }) {
   return (
     <div>
       <div className="hero">
+        <div style={{
+          fontSize: 13, fontWeight: 600, letterSpacing: '0.04em',
+          color: 'var(--color-text-secondary)', marginBottom: 6,
+          textTransform: 'uppercase',
+        }}>
+          WriteEZ — an easy way to write petitions
+        </div>
         <h1>Contact your representatives</h1>
         <p>
           Find your federal, state and local government representatives,
@@ -198,15 +228,64 @@ export default function Step1({ onNext }) {
 
       <div className="card">
         <div className="label">What's this about?</div>
-        <select value={topic} onChange={e => setTopic(e.target.value)}>
+        <select value={topic} onChange={e => {
+          setTopic(e.target.value);
+          if (e.target.value !== 'other') setCustomTopic('');
+        }}>
           <option value="">Select a topic…</option>
           {TOPICS.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
         </select>
+
+        {topic === 'other' && (
+          <div style={{ marginTop: 10 }}>
+            <input
+              type="text"
+              placeholder="Describe your topic e.g. 'road safety on Bridge Road'"
+              value={customTopic}
+              onChange={e => setCustomTopic(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '9px 12px',
+                borderRadius: 'var(--radius-sm)',
+                border: customTopic.trim()
+                  ? '1.5px solid var(--color-accent)'
+                  : '0.5px solid var(--color-border)',
+                fontSize: 13,
+                color: 'var(--color-text)',
+                background: 'var(--color-bg)',
+                outline: 'none',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.15s',
+              }}
+              autoFocus
+            />
+            <div style={{
+              fontSize: 11, marginTop: 5,
+              color: customTopic.trim()
+                ? 'var(--color-text-secondary)'
+                : '#d97706',
+            }}>
+              {customTopic.trim()
+                ? `Your email will be about: "${customTopic.trim()}"`
+                : 'Please describe your topic so the email can be personalised'}
+            </div>
+          </div>
+        )}
       </div>
 
       {stage === STAGE.NONE && (
         <div className="btns">
-          <button className="btn btn-primary" onClick={handleFind}>Find my representatives →</button>
+          <button
+            className="btn btn-primary"
+            onClick={handleFind}
+            disabled={topic === 'other' && !customTopic.trim()}
+            style={{
+              opacity: (topic === 'other' && !customTopic.trim()) ? 0.45 : 1,
+              cursor:  (topic === 'other' && !customTopic.trim()) ? 'default' : 'pointer',
+            }}
+          >
+            Find my representatives →
+          </button>
         </div>
       )}
 

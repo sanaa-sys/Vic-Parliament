@@ -1,14 +1,11 @@
 // api/generate-email.js
-// Vercel Serverless Function — replaces the Express POST /api/generate-email
-//
-// Vercel automatically serves any file in /api as a serverless function.
-// The client calls POST /api/generate-email unchanged.
+// Vercel Serverless Function — POST /api/generate-email
 //
 // Set GROQ_API_KEY in Vercel dashboard:
 //   Project → Settings → Environment Variables
 
 const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_MODEL    = 'llama-3.1-8b-instant';
+const GROQ_MODEL    = 'llama-3.3-70b-versatile';  // more reliable JSON output than 8b-instant
 
 const TOPIC_LABELS = {
   islamophobia:  'Islamophobia and anti-Muslim hate in Australia',
@@ -25,17 +22,15 @@ const TOPIC_LABELS = {
 function roleToSalutation(role) {
   if (!role) return 'Dear Member,';
   const r = role.toLowerCase();
-  if (r.includes('senator'))                return 'Dear Senator,';
-  if (r.includes('minister'))               return 'Dear Minister,';
-  if (r.includes('premier'))                return 'Dear Premier,';
-  if (r.includes('attorney'))               return 'Dear Attorney-General,';
-  if (r.includes('treasurer'))              return 'Dear Treasurer,';
-  if (r.includes('federal representative')
-   || r.includes('house of representatives')
-   || r.includes('house representative'))  return 'Dear Member of Parliament,';
-  if (r.includes('assembly'))               return 'Dear Member of the Legislative Assembly,';
-  if (r.includes('council'))                return 'Dear Member of the Legislative Council,';
-  return 'Dear Member,';
+  if (r.includes('senator'))    return 'Dear Senator,';
+  if (r.includes('minister'))   return 'Dear Minister,';
+  if (r.includes('premier'))    return 'Dear Premier,';
+  if (r.includes('attorney'))   return 'Dear Attorney-General,';
+  if (r.includes('treasurer'))  return 'Dear Treasurer,';
+  if (r.includes('assembly'))   return 'Dear Member of the Legislative Assembly,';
+  if (r.includes('council'))    return 'Dear Member of the Legislative Council,';
+  if (r.includes('mayor'))      return 'Dear Mayor,';
+  return 'Dear Member of Parliament,';
 }
 
 function buildPrompt({ topic, electorate, primaryRole, recipients }) {
@@ -60,25 +55,51 @@ Write a formal, respectful constituent email on the topic of ${topicLabel}. The 
 - Be sincere and personal in tone, not preachy
 - Close with "Yours sincerely,\\nA constituent in ${electorate}"
 
-Respond with ONLY a JSON object in this exact format:
+You MUST respond with ONLY a raw JSON object — no markdown, no code fences, no explanation:
 {"subject": "the subject line here", "body": "the full email body here with \\n for newlines"}`;
 }
 
+// ── Body parsing helper ────────────────────────────────────────────────────
+// Vercel does not auto-parse JSON bodies — we must do it ourselves.
+async function parseBody(req) {
+  // If Vercel already parsed it (some configs do), use it directly
+  if (req.body && typeof req.body === 'object') return req.body;
+
+  // Otherwise read the raw stream
+  return new Promise((resolve, reject) => {
+    let data = '';
+    req.on('data', chunk => { data += chunk; });
+    req.on('end', () => {
+      try { resolve(JSON.parse(data || '{}')); }
+      catch { resolve({}); }
+    });
+    req.on('error', reject);
+  });
+}
+
+// ── Handler ────────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
-  // Only accept POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed. Use POST.' });
   }
 
-  // 1. Check API key
+  // 1. Parse body
+  let body;
+  try {
+    body = await parseBody(req);
+  } catch {
+    return res.status(400).json({ error: 'Invalid request body.' });
+  }
+
+  // 2. Check API key
   if (!process.env.GROQ_API_KEY) {
     return res.status(503).json({
-      error: 'GROQ_API_KEY is not configured. Add it in Vercel → Project Settings → Environment Variables.',
+      error: 'GROQ_API_KEY is not set. Add it in Vercel → Project Settings → Environment Variables.',
     });
   }
 
-  // 2. Validate request body
-  const { topic, electorate, primaryRole, recipients } = req.body;
+  // 3. Validate fields
+  const { topic, electorate, primaryRole, recipients } = body;
 
   if (!topic)       return res.status(400).json({ error: 'Missing required field: topic' });
   if (!electorate)  return res.status(400).json({ error: 'Missing required field: electorate' });
@@ -87,7 +108,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'recipients must be a non-empty array' });
   }
 
-  // 3. Call Groq
+  // 4. Call Groq
   const prompt = buildPrompt({ topic, electorate, primaryRole, recipients });
 
   let groqRes;
@@ -99,14 +120,16 @@ export default async function handler(req, res) {
         'Content-Type':  'application/json',
       },
       body: JSON.stringify({
-        model:           GROQ_MODEL,
-        temperature:     0.7,
-        max_tokens:      1024,
-        response_format: { type: 'json_object' },
+        model:       GROQ_MODEL,
+        temperature: 0.7,
+        max_tokens:  1024,
+        // Note: response_format json_object is NOT used here because it can
+        // cause 500s on some models. Instead we instruct the model explicitly
+        // in the prompt to return raw JSON and strip any stray markdown below.
         messages: [
           {
             role:    'system',
-            content: 'You write formal Australian constituent emails. Always address recipients by role, never by name. Return valid JSON only — no markdown: {"subject":"...","body":"..."}',
+            content: 'You are a formal letter writer. Always respond with a single raw JSON object only — no markdown fences, no preamble: {"subject":"...","body":"..."}',
           },
           {
             role:    'user',
@@ -116,21 +139,24 @@ export default async function handler(req, res) {
       }),
     });
   } catch (err) {
-    console.error('[generate-email] Groq fetch error:', err.message);
-    return res.status(500).json({ error: 'Could not reach Groq API.' });
+    console.error('[generate-email] Groq fetch failed:', err.message);
+    return res.status(500).json({ error: `Could not reach Groq API: ${err.message}` });
   }
 
-  // 4. Handle Groq HTTP errors
+  // 5. Handle Groq HTTP errors
   if (!groqRes.ok) {
-    const errBody = await groqRes.json().catch(() => ({}));
-    const errMsg  = errBody?.error?.message || `HTTP ${groqRes.status}`;
-    console.error('[generate-email] Groq error:', groqRes.status, errMsg);
-    if (groqRes.status === 401) return res.status(500).json({ error: 'Invalid Groq API key.' });
-    if (groqRes.status === 429) return res.status(500).json({ error: 'Groq rate limit reached. Try again shortly.' });
+    let errMsg = `HTTP ${groqRes.status}`;
+    try {
+      const errBody = await groqRes.json();
+      errMsg = errBody?.error?.message || errMsg;
+    } catch {}
+    console.error('[generate-email] Groq returned', groqRes.status, errMsg);
+    if (groqRes.status === 401) return res.status(500).json({ error: 'Groq API key is invalid. Check GROQ_API_KEY in Vercel settings.' });
+    if (groqRes.status === 429) return res.status(500).json({ error: 'Groq rate limit reached. Please try again in a moment.' });
     return res.status(500).json({ error: `Groq API error: ${errMsg}` });
   }
 
-  // 5. Parse Groq response
+  // 6. Parse Groq response
   let groqData;
   try {
     groqData = await groqRes.json();
@@ -138,22 +164,34 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Could not parse Groq response.' });
   }
 
+  // 7. Extract and clean the JSON string from the response
   const raw   = groqData?.choices?.[0]?.message?.content || '';
-  const clean = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+  // Strip markdown code fences if the model added them despite being told not to
+  const clean = raw
+    .replace(/^```(?:json)?\s*/i, '')
+    .replace(/\s*```\s*$/i, '')
+    .trim();
+
+  // Find the JSON object even if there's stray text before/after
+  const jsonMatch = clean.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) {
+    console.error('[generate-email] No JSON object found in response. Raw:', raw);
+    return res.status(500).json({ error: 'Groq did not return valid JSON. Please try again.' });
+  }
 
   let parsed;
   try {
-    parsed = JSON.parse(clean);
-  } catch {
+    parsed = JSON.parse(jsonMatch[0]);
+  } catch (err) {
     console.error('[generate-email] JSON parse failed. Raw:', raw);
-    return res.status(500).json({ error: 'Groq returned invalid JSON.' });
+    return res.status(500).json({ error: 'Groq returned malformed JSON. Please try again.' });
   }
 
   if (!parsed.subject || !parsed.body) {
-    return res.status(500).json({ error: 'Groq response missing subject or body.' });
+    return res.status(500).json({ error: 'Groq response missing subject or body fields.' });
   }
 
-  // 6. Return — GROQ_API_KEY never reaches the browser
+  // 8. Return — GROQ_API_KEY never reaches the browser
   return res.status(200).json({
     subject: parsed.subject,
     body:    parsed.body,
