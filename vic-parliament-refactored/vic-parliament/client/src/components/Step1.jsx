@@ -189,14 +189,10 @@ export default function Step1({ onNext }) {
   return (
     <div>
       <div className="hero">
-        <div style={{
-          fontSize: 13, fontWeight: 600, letterSpacing: '0.04em',
-          color: 'var(--color-text-secondary)', marginBottom: 6,
-          textTransform: 'uppercase',
-        }}>
+        <h1>
           WriteEZ — an easy way to write petitions
-        </div>
-        <h1>Contact your representatives</h1>
+        </h1>
+        <p>Contact your representatives</p>
         <p>
           Find your federal, state and local government representatives,
           then send a personalised email about any issue that matters to you.
