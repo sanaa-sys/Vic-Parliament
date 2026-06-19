@@ -1,5 +1,5 @@
 // src/components/Step2.jsx
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import MemberRow from './MemberRow';
 
 export default function Step2({ lookup, onNext, onBack }) {
@@ -18,17 +18,48 @@ export default function Step2({ lookup, onNext, onBack }) {
   );
   const [lgaSel, setLgaSel] = useState(true);   // local council (mayor/CEO)
 
+  // Party filter state — '' means "All parties"
+  const [senPartyFilter,     setSenPartyFilter]     = useState('');
+  const [councilPartyFilter, setCouncilPartyFilter] = useState('');
+
+  // Unique party lists for each dropdown, sorted alphabetically
+  const senatorParties = useMemo(
+    () => [...new Set(senators.map(s => s.party).filter(Boolean))].sort(),
+    [senators]
+  );
+  const councilParties = useMemo(
+    () => [...new Set(councilMembers.map(m => m.party).filter(Boolean))].sort(),
+    [councilMembers]
+  );
+
+  // Filtered lists shown in each card
+  const filteredSenators = useMemo(
+    () => senPartyFilter ? senators.filter(s => s.party === senPartyFilter) : senators,
+    [senators, senPartyFilter]
+  );
+  const filteredCouncilMembers = useMemo(
+    () => councilPartyFilter ? councilMembers.filter(m => m.party === councilPartyFilter) : councilMembers,
+    [councilMembers, councilPartyFilter]
+  );
+
   function toggleSen(id) {
     setSenSel(prev => ({ ...prev, [id]: !prev[id] }));
   }
   function toggleCouncil(email) {
     setCouncilSel(prev => ({ ...prev, [email]: !prev[email] }));
   }
+  // "All" / "None" buttons act on the currently filtered (visible) members only
   function allSenators(val) {
-    setSenSel(Object.fromEntries(senators.map(s => [s.member_id, val])));
+    setSenSel(prev => ({
+      ...prev,
+      ...Object.fromEntries(filteredSenators.map(s => [s.member_id, val])),
+    }));
   }
   function allCouncil(val) {
-    setCouncilSel(Object.fromEntries(councilMembers.map(m => [m.email, val])));
+    setCouncilSel(prev => ({
+      ...prev,
+      ...Object.fromEntries(filteredCouncilMembers.map(m => [m.email, val])),
+    }));
   }
 
   function handleNext() {
@@ -58,6 +89,28 @@ export default function Step2({ lookup, onNext, onBack }) {
   if (district) descParts.push(`Assembly: ${district}`);
   if (region)   descParts.push(`Council: ${region}`);
   if (council)  descParts.push(`Local: ${council}${ward ? `, ${ward} Ward` : ''}`);
+
+  // Shared style for the party filter <select> dropdowns
+  const filterSelectStyle = {
+    fontSize: 11,
+    padding: '2px 24px 2px 6px',
+    borderRadius: 6,
+    border: '0.5px solid var(--color-border-secondary)',
+    background: 'var(--color-bg)',
+    color: 'var(--color-text)',
+    width: 'auto',
+    maxWidth: 140,
+  };
+
+  const filterControlsStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 6,
+    flexWrap: 'wrap',
+  };
+
+  const filterBtnStyle = { padding: '2px 10px', fontSize: 11 };
 
   return (
     <div>
@@ -89,15 +142,27 @@ export default function Step2({ lookup, onNext, onBack }) {
       </div>
 
       {/* Senators */}
-      <div className="label" style={{ marginBottom: 8 }}>
-        Federal — Victorian Senators (12){' '}
-        <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, fontSize: 11, marginLeft: 8 }}>
-          <button className="btn btn-sm" onClick={() => allSenators(true)}  style={{ padding: '2px 10px', fontSize: 11 }}>All</button>{' '}
-          <button className="btn btn-sm" onClick={() => allSenators(false)} style={{ padding: '2px 10px', fontSize: 11 }}>None</button>
-        </span>
+      <div style={{ marginBottom: 8 }}>
+        <div className="label" style={{ marginBottom: 0 }}>
+          Federal — Victorian Senators (12)
+        </div>
+        <div style={filterControlsStyle}>
+          {senatorParties.length > 1 && (
+            <select
+              value={senPartyFilter}
+              onChange={e => setSenPartyFilter(e.target.value)}
+              style={filterSelectStyle}
+            >
+              <option value="">All parties</option>
+              {senatorParties.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          )}
+          <button className="btn btn-sm" onClick={() => allSenators(true)}  style={filterBtnStyle}>All</button>
+          <button className="btn btn-sm" onClick={() => allSenators(false)} style={filterBtnStyle}>None</button>
+        </div>
       </div>
       <div className="card" style={{ padding: '8px 12px', marginBottom: 16 }}>
-        {senators.map((s, i) => (
+        {filteredSenators.length > 0 ? filteredSenators.map((s, i) => (
           <MemberRow
             key={s.member_id}
             member={s}
@@ -106,9 +171,13 @@ export default function Step2({ lookup, onNext, onBack }) {
             electorateLabel={null}
             checked={!!senSel[s.member_id]}
             onChange={() => toggleSen(s.member_id)}
-            isLast={i === senators.length - 1}
+            isLast={i === filteredSenators.length - 1}
           />
-        ))}
+        )) : (
+          <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', padding: '4px 0' }}>
+            No senators match "{senPartyFilter}".
+          </div>
+        )}
       </div>
 
       {/* Assembly */}
@@ -134,15 +203,27 @@ export default function Step2({ lookup, onNext, onBack }) {
       </div>
 
       {/* Council */}
-      <div className="label" style={{ marginBottom: 8 }}>
-        State — Legislative Council (5 members for your region){' '}
-        <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, fontSize: 11, marginLeft: 8 }}>
-          <button className="btn btn-sm" onClick={() => allCouncil(true)}  style={{ padding: '2px 10px', fontSize: 11 }}>All</button>{' '}
-          <button className="btn btn-sm" onClick={() => allCouncil(false)} style={{ padding: '2px 10px', fontSize: 11 }}>None</button>
-        </span>
+      <div style={{ marginBottom: 8 }}>
+        <div className="label" style={{ marginBottom: 0 }}>
+          State — Legislative Council (5 members for your region)
+        </div>
+        <div style={filterControlsStyle}>
+          {councilParties.length > 1 && (
+            <select
+              value={councilPartyFilter}
+              onChange={e => setCouncilPartyFilter(e.target.value)}
+              style={filterSelectStyle}
+            >
+              <option value="">All parties</option>
+              {councilParties.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          )}
+          <button className="btn btn-sm" onClick={() => allCouncil(true)}  style={filterBtnStyle}>All</button>
+          <button className="btn btn-sm" onClick={() => allCouncil(false)} style={filterBtnStyle}>None</button>
+        </div>
       </div>
       <div className="card" style={{ padding: '8px 12px' }}>
-        {councilMembers.length > 0 ? councilMembers.map((m, i) => (
+        {filteredCouncilMembers.length > 0 ? filteredCouncilMembers.map((m, i) => (
           <MemberRow
             key={m.email}
             member={m}
@@ -151,11 +232,13 @@ export default function Step2({ lookup, onNext, onBack }) {
             electorateLabel={m.electorate}
             checked={!!councilSel[m.email]}
             onChange={() => toggleCouncil(m.email)}
-            isLast={i === councilMembers.length - 1}
+            isLast={i === filteredCouncilMembers.length - 1}
           />
         )) : (
           <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', padding: '4px 0' }}>
-            No Council region data found for postcode {postcode}.
+            {councilMembers.length === 0
+              ? `No Council region data found for postcode ${postcode}.`
+              : `No council members match "${councilPartyFilter}".`}
           </div>
         )}
       </div>
@@ -188,7 +271,9 @@ export default function Step2({ lookup, onNext, onBack }) {
                     </span>
                   )}
                 </div>
-
+                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 4 }}>
+                  Mayor: {councilInfo.mayor}
+                </div>
                 {councilInfo.phone && (
                   <div style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
                     Phone: <a href={`tel:${councilInfo.phone}`} style={{ color: 'var(--color-accent)' }}>{councilInfo.phone}</a>

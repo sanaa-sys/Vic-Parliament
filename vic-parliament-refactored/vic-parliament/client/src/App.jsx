@@ -6,6 +6,8 @@ import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 import Step4 from './components/Step4';
 
+
+
 export default function App() {
   const [step,      setStep]      = useState(1);
   const [lookup,    setLookup]    = useState(null);  // postcode lookup result
@@ -36,7 +38,8 @@ export default function App() {
   }
 
   return (
-    <div className="container">
+      <div className="container">
+
       <ProgressBar step={step} />
 
       {step === 1 && (
@@ -67,6 +70,7 @@ export default function App() {
           onBack={() => goStep(3)}
         />
       )}
-    </div>
+      </div>
+
   );
 }

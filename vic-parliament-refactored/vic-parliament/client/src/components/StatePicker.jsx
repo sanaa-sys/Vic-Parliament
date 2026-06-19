@@ -16,32 +16,80 @@ const PALETTE = [
 
 const ARCGIS_BASE = 'https://services-ap1.arcgis.com/P744lA0wf4LlBZ84/ArcGIS/rest/services/Vicmap_Admin/FeatureServer';
 const LAYER_ID    = { district: 15, region: 16 };
+// Field names confirmed from Vicmap Admin FeatureServer — no probe needed
+const NAME_FIELD  = { district: 'district', region: 'region' };
+
+// ── Caching — same pattern as CouncilPicker ────────────────────────────────
+// In-memory Map per mode, plus sessionStorage so repeat loads of the same
+// district/region within a session are instant instead of re-fetching.
+const memCache = { district: new Map(), region: new Map() };
+const SS_PREFIX = 'vic_state_features_v1_';
+
+function loadSessionCache(mode) {
+  try {
+    const raw = sessionStorage.getItem(SS_PREFIX + mode);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveSessionCache(mode, cache) {
+  try {
+    sessionStorage.setItem(SS_PREFIX + mode, JSON.stringify(cache));
+  } catch {
+    // sessionStorage full or unavailable — silently skip caching
+  }
+}
+
 async function fetchStateFeatures(names, mode) {
-  const layer = LAYER_ID[mode];
+  const layer     = LAYER_ID[mode];
+  const nameField = NAME_FIELD[mode];
+  const cache     = memCache[mode];
 
-  // Field names confirmed from Vicmap Admin FeatureServer:
-  //   Layer 15 STATE_ASSEMBLY_2022 → 'district'
-  //   Layer 16 STATE_COUNCIL_2022  → 'region'
-  const NAME_MAP  = { district: 'district', region: 'region' };
-  const nameField = NAME_MAP[mode];
+  // Check caches first — only fetch names we don't already have
+  const sessionCache = loadSessionCache(mode);
+  const missing = [];
 
-  // Fetch only the features we need
-  // Use upper() for case-insensitive match — Vicmap field values may differ
-  // in capitalisation from the names stored in our XLS data
-  const inList = names.map(n => `'${n.replace(/'/g,"''").toUpperCase()}'`).join(',');
-  const params = new URLSearchParams({
-    where: `upper(${nameField}) IN (${inList})`,
-    outFields: nameField, f: 'geojson', outSR: '4326', maxAllowableOffset: '0.001',
+  names.forEach(name => {
+    const key = name.toUpperCase();
+    if (cache.has(key)) return;                  // already in memory
+    if (sessionCache[key]) {                        // in sessionStorage — promote to memory
+      cache.set(key, sessionCache[key]);
+      return;
+    }
+    missing.push(name);
   });
-  const res  = await fetch(`${ARCGIS_BASE}/${layer}/query?${params}`);
-  if (!res.ok) throw new Error(`ArcGIS query ${res.status}`);
-  const data = await res.json();
 
+  // Fetch only the boundaries we don't already have cached
+  if (missing.length > 0) {
+    const inList = missing.map(n => `'${n.replace(/'/g, "''").toUpperCase()}'`).join(',');
+    const params = new URLSearchParams({
+      where:              `upper(${nameField}) IN (${inList})`,
+      outFields:          nameField,
+      f:                  'geojson',
+      outSR:              '4326',
+      maxAllowableOffset: '0.001',
+    });
+    const res  = await fetch(`${ARCGIS_BASE}/${layer}/query?${params}`);
+    if (!res.ok) throw new Error(`ArcGIS query ${res.status}`);
+    const data = await res.json();
+
+    let sessionCacheDirty = false;
+    (data.features || []).forEach(feat => {
+      const key = (feat.properties?.[nameField] ?? '').toUpperCase();
+      if (!key) return;
+      cache.set(key, feat);
+      sessionCache[key] = feat;
+      sessionCacheDirty = true;
+    });
+    if (sessionCacheDirty) saveSessionCache(mode, sessionCache);
+  }
+
+  // Build the final features array from the (now fully populated) cache
   const features = names
     .map(name => {
-      const feat = data.features?.find(
-        f => (f.properties?.[nameField] ?? '').toLowerCase() === name.toLowerCase()
-      );
+      const feat = cache.get(name.toUpperCase());
       return feat ? { name, geojson: feat } : null;
     })
     .filter(Boolean);

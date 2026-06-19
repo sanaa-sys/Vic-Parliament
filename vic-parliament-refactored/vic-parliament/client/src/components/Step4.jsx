@@ -1,6 +1,8 @@
 // src/components/Step4.jsx
 import { useState } from 'react';
 
+const CC_EMAIL = 'jazeer@boiv.org.au';
+
 export default function Step4({ selection, email, onBack }) {
   const { selected } = selection;
   const { subject, body } = email;
@@ -13,7 +15,7 @@ export default function Step4({ selection, email, onBack }) {
   // ── mailto helpers ────────────────────────────────────────────────────────
   function buildMailto(emails) {
     const to = emails.map(encodeURIComponent).join(',');
-    return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    return `mailto:${to}?cc=${encodeURIComponent(CC_EMAIL)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   function sendMailto() {
@@ -32,6 +34,7 @@ export default function Step4({ selection, email, onBack }) {
     if (!allEmails.length) { alert('No email addresses found.'); return; }
     const params = new URLSearchParams({
       to:      allEmails.join(','),
+      cc:      CC_EMAIL,
       subject,
       body,
     });
@@ -162,6 +165,7 @@ export default function Step4({ selection, email, onBack }) {
             label: `To — all ${allEmails.length} recipients`,
             text:  allEmails.join(', '),
           },
+          { field: 'cc', label: 'Cc', text: CC_EMAIL },
           { field: 'subject', label: 'Subject', text: subject },
           { field: 'body',    label: 'Message body', text: body },
         ].map(({ field, label, text }) => (

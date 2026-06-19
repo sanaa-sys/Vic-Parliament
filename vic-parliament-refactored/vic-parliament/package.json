@@ -4,9 +4,12 @@
   "description": "Victorian Constituent Contact Platform",
   "scripts": {
     "install:all": "npm install --prefix server && npm install --prefix client",
-    "dev:server":  "npm run dev --prefix server",
-    "dev:client":  "npm run dev --prefix client",
-    "dev":         "node run-dev.mjs",
-    "build":       "npm run build --prefix client"
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev": "node run-dev.mjs",
+    "build": "npm run build --prefix client"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
   }
 }
