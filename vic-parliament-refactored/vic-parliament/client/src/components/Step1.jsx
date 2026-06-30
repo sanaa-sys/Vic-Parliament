@@ -25,9 +25,10 @@ const TOPICS = [
 const STAGE = { NONE: 'none', FEDERAL: 'federal', DISTRICT: 'district', COUNCIL: 'council' };
 
 export default function Step1({ onNext }) {
-  const [postcode, setPostcode] = useState('');
-  const [topic,    setTopic]    = useState('');
-  const [error,    setError]    = useState('');
+  const [postcode,    setPostcode]    = useState('');
+  const [topic,       setTopic]       = useState('');
+  const [customTopic, setCustomTopic] = useState('');
+  const [error,       setError]       = useState('');
   const [stage,    setStage]    = useState(STAGE.NONE);
   const [lookup,   setLookup]   = useState(null);
 
@@ -61,8 +62,17 @@ export default function Step1({ onNext }) {
     }
     const result = lookupPostcode(postcode);
     if (!result) { setError(`Postcode ${postcode} not found.`); return; }
+    if (topic === 'other' && !customTopic.trim()) {
+      setError('Please describe your topic.');
+      return;
+    }
 
-    const baseLookup = { postcode, topic: topic || 'other', ...result };
+    const baseLookup = {
+      postcode,
+      topic: topic || 'other',
+      ...(topic === 'other' && { customTopic: customTopic.trim() }),
+      ...result,
+    };
     setLookup(baseLookup);
 
     // Determine first stage needed
@@ -198,10 +208,31 @@ export default function Step1({ onNext }) {
 
       <div className="card">
         <div className="label">What's this about?</div>
-        <select value={topic} onChange={e => setTopic(e.target.value)}>
+        <select
+          value={topic}
+          onChange={e => {
+            setTopic(e.target.value);
+            if (e.target.value !== 'other') setCustomTopic('');
+          }}
+        >
           <option value="">Select a topic…</option>
           {TOPICS.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
         </select>
+        {topic === 'other' && (
+          <>
+            <input
+              type="text"
+              value={customTopic}
+              onChange={e => { setCustomTopic(e.target.value); setError(''); }}
+              placeholder="Describe your topic…"
+              style={{ marginTop: 10 }}
+              onKeyDown={e => e.key === 'Enter' && stage === STAGE.NONE && handleFind()}
+            />
+            <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-secondary)' }}>
+              Your topic will be used to generate a personalised email draft
+            </div>
+          </>
+        )}
       </div>
 
       {stage === STAGE.NONE && (

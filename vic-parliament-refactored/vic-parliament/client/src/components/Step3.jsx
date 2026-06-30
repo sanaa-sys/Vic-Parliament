@@ -42,7 +42,7 @@ export default function Step3({ lookup, selection, onNext, onBack }) {
     setLoadWidth(0);
     setTimeout(() => setLoadWidth(88), 50);
 
-    const { topic, division, federalRep } = lookup;
+    const { topic, customTopic, division, federalRep } = lookup;
 
     // Use role, not name
     const primaryRole = getPrimaryRole(selection.selected[0] || federalRep);
@@ -58,7 +58,7 @@ export default function Step3({ lookup, selection, onNext, onBack }) {
       const res = await fetch('/api/generate-email', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ topic, electorate, primaryRole, recipients }),
+        body:    JSON.stringify({ topic, customTopic, electorate, primaryRole, recipients }),
       });
 
       if (!res.ok) {
@@ -81,7 +81,8 @@ export default function Step3({ lookup, selection, onNext, onBack }) {
       const fb = getTemplateFallback(
         topic,
         salutation,
-        division || 'your electorate'
+        division || 'your electorate',
+        customTopic,
       );
       setSubject(fb.subject);
       setBody(fb.body);

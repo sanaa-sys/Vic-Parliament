@@ -40,8 +40,10 @@ function roleToSalutation(role) {
   return 'Dear Member,';
 }
 
-function buildPrompt({ topic, electorate, primaryRole, recipients }) {
-  const topicLabel     = TOPIC_LABELS[topic] || topic;
+function buildPrompt({ topic, customTopic, electorate, primaryRole, recipients }) {
+  const topicLabel     = (topic === 'other' && customTopic)
+    ? customTopic
+    : (TOPIC_LABELS[topic] || topic);
   const salutation     = roleToSalutation(primaryRole);
   const recipientLines = (recipients || [])
     .map(r => `- ${r.name} (${r.role}, ${r.party})`)
@@ -97,9 +99,12 @@ export const handler = async (event) => {
     return json(400, { error: 'Request body must be valid JSON.' });
   }
 
-  const { topic, electorate, primaryRole, recipients } = body;
+  const { topic, customTopic, electorate, primaryRole, recipients } = body;
 
   if (!topic)       return json(400, { error: 'Missing required field: topic' });
+  if (topic === 'other' && !customTopic?.trim()) {
+    return json(400, { error: 'Missing required field: customTopic' });
+  }
   if (!electorate)  return json(400, { error: 'Missing required field: electorate' });
   if (!primaryRole) return json(400, { error: 'Missing required field: primaryRole' });
   if (!Array.isArray(recipients) || recipients.length === 0) {
@@ -107,7 +112,7 @@ export const handler = async (event) => {
   }
 
   // 3. Call Groq
-  const prompt = buildPrompt({ topic, electorate, primaryRole, recipients });
+  const prompt = buildPrompt({ topic, customTopic, electorate, primaryRole, recipients });
 
   let groqRes;
   try {

@@ -152,13 +152,23 @@ A constituent in {electorate}`,
   ],
 };
 
-export function getTemplateFallback(topic, salutation, electorate) {
+export function getTemplateFallback(topic, salutation, electorate, customTopic) {
   const tpls = TEMPLATES[topic] || TEMPLATES.other;
   const tpl  = tpls[Math.floor(Math.random() * tpls.length)];
+  const topicLabel = topic === 'other' && customTopic ? customTopic : null;
   return {
-    subject: tpl.subject.replace(/{electorate}/g, electorate),
-    body:    tpl.body
-               .replace(/{role}/g, salutation)
-               .replace(/{electorate}/g, electorate),
+    subject: (topicLabel
+      ? `Concern: ${topicLabel}`
+      : tpl.subject
+    ).replace(/{electorate}/g, electorate),
+    body:    (topicLabel
+      ? tpl.body.replace(
+          'an important matter to your attention.',
+          `the following matter: ${topicLabel}.`,
+        )
+      : tpl.body
+    )
+      .replace(/{role}/g, salutation)
+      .replace(/{electorate}/g, electorate),
   };
 }
