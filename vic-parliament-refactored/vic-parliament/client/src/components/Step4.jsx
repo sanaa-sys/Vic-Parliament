@@ -88,72 +88,19 @@ export default function Step4({ selection, email, onBack }) {
         </ul>
       </div>
 
-      {/* ── Option 1: Proton Mail ───────────────────────────────────────── */}
+      {/* Send options */}
       <div className="card" style={{ marginBottom: 12 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 14 }}>
-          {/* Proton logo SVG */}
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="32" height="32" rx="8" fill="#6D4AFF"/>
-            <path d="M7 10.5C7 9.12 8.12 8 9.5 8H17C20.31 8 23 10.69 23 14C23 17.31 20.31 20 17 20H11V24H7V10.5Z"
-                  fill="white"/>
-            <path d="M11 12V16H17C18.1 16 19 15.1 19 14C19 12.9 18.1 12 17 12H11Z"
-                  fill="#6D4AFF"/>
-          </svg>
-          <div>
-            <div style={{ fontWeight: 600, fontSize: 15, color: 'var(--color-text)' }}>
-              Open in Proton Mail
-            </div>
-            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 2 }}>
-              Opens Proton Mail web compose with all{' '}
-              <strong>{allEmails.length} recipients</strong>, subject and body pre-filled.
-              You must be signed into Proton Mail in your browser.
-            </div>
-          </div>
+        <div className="label" style={{ marginBottom: 8 }}>How to send</div>
+        <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+          <strong style={{ color: 'var(--color-text)' }}>Send email</strong> opens your default email app
+          (Gmail, Outlook, Apple Mail, etc.) with everything pre-filled.
+          <br />
+                  <strong style={{ color: 'var(--color-text-secondary)' }}>Send anonymous email</strong> opens Proton Mail in a new tab
+          if you prefer a private email account. You must be signed into Proton Mail in your browser.
         </div>
-        <button
-          className="btn btn-primary"
-          style={{
-            width: '100%', justifyContent: 'center', padding: 12, fontSize: 15,
-            background: '#6D4AFF', borderColor: '#5a38e0',
-          }}
-          onClick={openProtonMail}
-        >
-          Open Proton Mail →
-        </button>
       </div>
 
-      {/* ── Option 2: Default email app ────────────────────────────────── */}
-      <div className="card" style={{ marginBottom: 12 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 14 }}>
-          <div style={{ fontSize: 28 }}>📧</div>
-          <div>
-            <div style={{ fontWeight: 600, fontSize: 15, color: 'var(--color-text)' }}>
-              Open in your default email app
-            </div>
-            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 2 }}>
-              Works with Gmail, Outlook, Apple Mail, Yahoo — any app set as your default.
-            </div>
-          </div>
-        </div>
-        <button
-          className="btn"
-          style={{ width: '100%', justifyContent: 'center', padding: 12, fontSize: 15 }}
-          onClick={sendMailto}
-        >
-          Open email app →
-        </button>
-        {showMailtoNote && (
-          <div style={{
-            marginTop: 10, fontSize: 12,
-            color: 'var(--color-text-secondary)', textAlign: 'center',
-          }}>
-            Nothing happened? Your browser may not have a default email app set.
-            Use Proton Mail above or the <strong>Copy</strong> option below.
-          </div>
-        )}
-      </div>
-
-      {/* ── Option 3: Copy and paste ────────────────────────────────────── */}
+      {/* ── Copy and paste ──────────────────────────────────────────────── */}
       <div className="card" style={{ marginBottom: 12 }}>
         <div className="label" style={{ marginBottom: 10 }}>
           Copy and paste manually
@@ -202,7 +149,26 @@ export default function Step4({ selection, email, onBack }) {
 
       <div className="btns" style={{ marginTop: 16 }}>
         <button className="btn" onClick={onBack}>← Back</button>
+        <button className="btn btn-primary" onClick={sendMailto}>
+          Send email →
+        </button>
+        <button
+                  className="btn btn-primary"
+     
+          onClick={openProtonMail}
+        >
+          Send anonymous email →
+        </button>
       </div>
+      {showMailtoNote && (
+        <div style={{
+          marginTop: 10, fontSize: 12,
+          color: 'var(--color-text-secondary)', textAlign: 'center',
+        }}>
+          Nothing happened? Your browser may not have a default email app set.
+          Use <strong>Send anonymous email</strong> or the <strong>Copy</strong> option above.
+        </div>
+      )}
     </div>
   );
 }
