@@ -10,7 +10,7 @@
 //   2. sessionStorage — survives page reloads within the same browser tab
 // The field name (lga_name) is hardcoded — no probe request is made.
 
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import LeafletMap from './LeafletMap';
 
 const PALETTE = [
@@ -108,11 +108,25 @@ async function fetchCouncilFeatures(councils, councilData) {
   return { features };
 }
 
-export default function CouncilPicker({ postcode, councilWardMap, councilData, onSelect }) {
+export default function CouncilPicker({
+  postcode, councilWardMap, councilData, onSelect,
+  multiStep, selected: controlledSelected, onSelectedChange,
+}) {
   const councils    = Object.keys(councilWardMap);
   const isAmbiguous = councils.length > 1;
 
-  const [selectedCouncil, setSelectedCouncil] = useState(isAmbiguous ? null : councils[0]);
+  const [internalSelected, setInternalSelected] = useState(isAmbiguous ? null : councils[0]);
+  const selectedCouncil = multiStep ? controlledSelected : internalSelected;
+  const setSelectedCouncil = (val) => {
+    if (multiStep) onSelectedChange?.(val);
+    else setInternalSelected(val);
+  };
+
+  useEffect(() => {
+    if (multiStep && !isAmbiguous && councils[0]) {
+      onSelectedChange?.(councils[0]);
+    }
+  }, [multiStep, isAmbiguous, councils.join(','), onSelectedChange]);
 
   // Stable fetchFeatures — only recreated if the council list changes
   const fetchFeatures = useCallback(
@@ -234,15 +248,17 @@ export default function CouncilPicker({ postcode, councilWardMap, councilData, o
       </div>
 
       {/* Confirm */}
-      <button className="btn btn-primary" style={{
-        width: '100%', justifyContent: 'center', padding: '11px 20px', fontSize: 14,
-        opacity: selectedCouncil ? 1 : 0.45, cursor: selectedCouncil ? 'pointer' : 'default',
-      }}
-        disabled={!selectedCouncil}
-        onClick={() => selectedCouncil && onSelect({ council: selectedCouncil })}
-      >
-        {selectedCouncil ? `Confirm — ${selectedCouncil} →` : 'Select your council to continue →'}
-      </button>
+      {!multiStep && (
+        <button className="btn btn-primary" style={{
+          width: '100%', justifyContent: 'center', padding: '11px 20px', fontSize: 14,
+          opacity: selectedCouncil ? 1 : 0.45, cursor: selectedCouncil ? 'pointer' : 'default',
+        }}
+          disabled={!selectedCouncil}
+          onClick={() => selectedCouncil && onSelect({ council: selectedCouncil })}
+        >
+          {selectedCouncil ? `Confirm — ${selectedCouncil} →` : 'Select your council to continue →'}
+        </button>
+      )}
     </div>
   );
 }

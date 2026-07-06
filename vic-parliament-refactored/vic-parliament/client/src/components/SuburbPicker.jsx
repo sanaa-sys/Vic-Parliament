@@ -31,9 +31,17 @@ async function fetchElectorateFeatures(electorateNames) {
   return { features };
 }
 
-export default function SuburbPicker({ postcode, electorateSuburbs, onSelect }) {
+export default function SuburbPicker({
+  postcode, electorateSuburbs, onSelect,
+  multiStep, selected: controlledSelected, onSelectedChange,
+}) {
   const [richSuburbs, setRichSuburbs] = useState(electorateSuburbs);
-  const [selected,    setSelected]    = useState(null);
+  const [internalSelected, setInternalSelected] = useState(null);
+  const selected = multiStep ? controlledSelected : internalSelected;
+  const setSelected = (val) => {
+    if (multiStep) onSelectedChange?.(val);
+    else setInternalSelected(val);
+  };
 
   const electorates = Object.keys(richSuburbs);
 
@@ -178,15 +186,17 @@ export default function SuburbPicker({ postcode, electorateSuburbs, onSelect }) 
       )}
 
       {/* Confirm */}
-      <button className="btn btn-primary" style={{
-        width: '100%', justifyContent: 'center', padding: '11px 20px', fontSize: 14,
-        opacity: selected ? 1 : 0.45, cursor: selected ? 'pointer' : 'default',
-      }}
-        disabled={!selected}
-        onClick={() => selected && onSelect(selected)}
-      >
-        {selected ? `Confirm — I'm in Division of ${selected} →` : 'Select your electorate to continue →'}
-      </button>
+      {!multiStep && (
+        <button className="btn btn-primary" style={{
+          width: '100%', justifyContent: 'center', padding: '11px 20px', fontSize: 14,
+          opacity: selected ? 1 : 0.45, cursor: selected ? 'pointer' : 'default',
+        }}
+          disabled={!selected}
+          onClick={() => selected && onSelect(selected)}
+        >
+          {selected ? `Confirm — I'm in Division of ${selected} →` : 'Select your electorate to continue →'}
+        </button>
+      )}
     </div>
   );
 }

@@ -40,6 +40,16 @@ export default function Step1({ onNext }) {
   const [councilData,    setCouncilData]    = useState(null); // {councilName: {mayor,...}}
   const [councilWardMap, setCouncilWardMap] = useState(null); // {councilName: [ward,...]} for current pc
 
+  // Pending selections for multi-step navigation
+  const [pendingFederal,  setPendingFederal]  = useState(null);
+  const [pendingDistrict, setPendingDistrict] = useState(null);
+  const [pendingCouncil,  setPendingCouncil]  = useState(null);
+
+  function countDistricts(pc) {
+    if (!pc || !districtData) return districtsList?.length ?? 0;
+    return Object.keys(districtData[pc] || {}).length;
+  }
+
   // Load state and council data on mount
   useEffect(() => {
     fetch('/postcode_district_suburbs.json').then(r => r.json()).then(setDistrictData).catch(() => {});
@@ -74,6 +84,9 @@ export default function Step1({ onNext }) {
       ...result,
     };
     setLookup(baseLookup);
+    setPendingFederal(null);
+    setPendingDistrict(null);
+    setPendingCouncil(null);
 
     // Determine first stage needed
     if (result.divisions.length > 1) {
@@ -92,7 +105,9 @@ export default function Step1({ onNext }) {
       .then(r => r.json())
       .then(data => {
         const cwMap = data[pc] || {};
+        const councils = Object.keys(cwMap);
         setCouncilWardMap(cwMap);
+        if (councils.length === 1) setPendingCouncil(councils[0]);
         setLookup(prev => ({ ...(prev || currentLookup), councilWardMap: cwMap }));
         setStage(STAGE.COUNCIL);
       })
@@ -106,7 +121,6 @@ export default function Step1({ onNext }) {
     const updated = {
       ...lookup,
       division:   chosenDivision,
-      divisions:  [chosenDivision],
       federalRep: window.REPRESENTATIVES?.[chosenDivision] ?? lookup.federalRep,
     };
     setLookup(updated);
@@ -149,17 +163,83 @@ export default function Step1({ onNext }) {
     onNext(finalLookup);
   }
 
+  function handleStageBack() {
+    if (stage === STAGE.FEDERAL) {
+      setStage(STAGE.NONE);
+      setLookup(null);
+      setDistrictsList(null);
+      setCouncilWardMap(null);
+      setPendingFederal(null);
+      setPendingDistrict(null);
+      setPendingCouncil(null);
+      return;
+    }
+
+    if (stage === STAGE.DISTRICT) {
+      setPendingDistrict(null);
+      setCouncilWardMap(null);
+      setPendingCouncil(null);
+      if (lookup?.divisions?.length > 1) {
+        setStage(STAGE.FEDERAL);
+        setPendingFederal(lookup.division || null);
+      } else {
+        setStage(STAGE.NONE);
+        setLookup(null);
+        setDistrictsList(null);
+      }
+      return;
+    }
+
+    if (stage === STAGE.COUNCIL) {
+      setPendingCouncil(null);
+      setCouncilWardMap(null);
+      const pc = lookup?.postcode;
+      if (countDistricts(pc) > 1) {
+        setDistrictsList(Object.keys(districtData[pc]));
+        setStage(STAGE.DISTRICT);
+        setPendingDistrict(lookup.district || null);
+      } else if (lookup?.divisions?.length > 1) {
+        setStage(STAGE.FEDERAL);
+        setPendingFederal(lookup.division || null);
+      } else {
+        setStage(STAGE.NONE);
+        setLookup(null);
+        setDistrictsList(null);
+      }
+    }
+  }
+
+  function handleStageNext() {
+    if (stage === STAGE.FEDERAL && pendingFederal) {
+      handleFederalSelected(pendingFederal);
+    } else if (stage === STAGE.DISTRICT && pendingDistrict) {
+      handleDistrictSelected(pendingDistrict);
+    } else if (stage === STAGE.COUNCIL && pendingCouncil) {
+      handleCouncilSelected({ council: pendingCouncil });
+    }
+  }
+
+  function canProceed() {
+    if (stage === STAGE.FEDERAL)  return !!pendingFederal;
+    if (stage === STAGE.DISTRICT) return !!pendingDistrict;
+    if (stage === STAGE.COUNCIL)  return !!pendingCouncil;
+    return false;
+  }
+
   const federalElectorateSuburbs = lookup?.divisions
     ? Object.fromEntries(lookup.divisions.map(d => [d, []]))
     : null;
 
   const totalStages = (() => {
+    if (!lookup) return 0;
     let n = 0;
-    if (lookup?.divisions?.length > 1) n++;
-    if (districtsList?.length > 1) n++;
+    if (lookup.divisions?.length > 1) n++;
+    if (countDistricts(lookup.postcode) > 1) n++;
     n++; // council always shown
     return n;
   })();
+
+  const multiStep = totalStages > 1;
 
   const stageNumber = (() => {
     if (stage === STAGE.FEDERAL) return 1;
@@ -167,7 +247,7 @@ export default function Step1({ onNext }) {
     if (stage === STAGE.COUNCIL) {
       let n = 1;
       if (lookup?.divisions?.length > 1) n++;
-      if (districtsList?.length > 1) n++;
+      if (countDistricts(lookup?.postcode) > 1) n++;
       return n;
     }
     return 0;
@@ -250,6 +330,9 @@ export default function Step1({ onNext }) {
             postcode={postcode}
             electorateSuburbs={federalElectorateSuburbs}
             onSelect={handleFederalSelected}
+            multiStep={multiStep}
+            selected={pendingFederal}
+            onSelectedChange={setPendingFederal}
           />
         </>
       )}
@@ -262,6 +345,9 @@ export default function Step1({ onNext }) {
           <StatePicker
             postcode={postcode} mode="district" options={districtsList}
             onSelect={handleDistrictSelected}
+            multiStep={multiStep}
+            selected={pendingDistrict}
+            onSelectedChange={setPendingDistrict}
           />
         </>
       )}
@@ -276,8 +362,24 @@ export default function Step1({ onNext }) {
             councilWardMap={councilWardMap}
             councilData={councilData || {}}
             onSelect={handleCouncilSelected}
+            multiStep={multiStep}
+            selected={pendingCouncil}
+            onSelectedChange={setPendingCouncil}
           />
         </>
+      )}
+
+      {stage !== STAGE.NONE && multiStep && (
+        <div className="btns">
+          <button className="btn" onClick={handleStageBack}>← Back</button>
+          <button
+            className="btn btn-primary"
+            onClick={handleStageNext}
+            disabled={!canProceed()}
+          >
+            {stageNumber === totalStages ? 'Continue →' : 'Next →'}
+          </button>
+        </div>
       )}
     </div>
   );

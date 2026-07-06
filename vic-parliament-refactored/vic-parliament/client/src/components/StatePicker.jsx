@@ -97,9 +97,17 @@ async function fetchStateFeatures(names, mode) {
   return { features };
 }
 
-export default function StatePicker({ postcode, mode = 'district', options, onSelect }) {
-  const [suburbs,  setSuburbs]  = useState({});
-  const [selected, setSelected] = useState(null);
+export default function StatePicker({
+  postcode, mode = 'district', options, onSelect,
+  multiStep, selected: controlledSelected, onSelectedChange,
+}) {
+  const [suburbs, setSuburbs] = useState({});
+  const [internalSelected, setInternalSelected] = useState(null);
+  const selected = multiStep ? controlledSelected : internalSelected;
+  const setSelected = (val) => {
+    if (multiStep) onSelectedChange?.(val);
+    else setInternalSelected(val);
+  };
 
   const singularLabel = mode === 'district' ? 'district' : 'region';
   const prefix        = mode === 'district' ? 'District of' : '';
@@ -237,17 +245,19 @@ export default function StatePicker({ postcode, mode = 'district', options, onSe
         </div>
       )}
 
-      <button className="btn btn-primary" style={{
-        width: '100%', justifyContent: 'center', padding: '11px 20px', fontSize: 14,
-        opacity: selected ? 1 : 0.45, cursor: selected ? 'pointer' : 'default',
-      }}
-        disabled={!selected}
-        onClick={() => selected && onSelect(selected)}
-      >
-        {selected
-          ? `Confirm — ${prefix ? prefix + ' ' : ''}${selected} →`
-          : `Select your ${singularLabel} to continue →`}
-      </button>
+      {!multiStep && (
+        <button className="btn btn-primary" style={{
+          width: '100%', justifyContent: 'center', padding: '11px 20px', fontSize: 14,
+          opacity: selected ? 1 : 0.45, cursor: selected ? 'pointer' : 'default',
+        }}
+          disabled={!selected}
+          onClick={() => selected && onSelect(selected)}
+        >
+          {selected
+            ? `Confirm — ${prefix ? prefix + ' ' : ''}${selected} →`
+            : `Select your ${singularLabel} to continue →`}
+        </button>
+      )}
     </div>
   );
 }
