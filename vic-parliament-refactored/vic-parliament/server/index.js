@@ -67,8 +67,10 @@ function roleToSalutation(role) {
 
 // ── Helper: build the AI prompt ────────────────────────────────────────────
 
-function buildPrompt({ topic, electorate, primaryRole, recipients }) {
-  const topicLabel     = TOPIC_LABELS[topic] || topic;
+function buildPrompt({ topic, customTopic, electorate, primaryRole, recipients }) {
+  const topicLabel     = (topic === 'other' && customTopic?.trim())
+    ? customTopic.trim()
+    : (TOPIC_LABELS[topic] || topic);
   const salutation     = roleToSalutation(primaryRole);
   const recipientLines = (recipients || [])
     .map(r => `- ${r.name} (${r.role}, ${r.party})`)
@@ -136,10 +138,13 @@ app.post('/api/generate-email', async (req, res) => {
   }
 
   // 2. Validate request body
-  const { topic, electorate, primaryRole, recipients } = req.body;
+  const { topic, customTopic, electorate, primaryRole, recipients } = req.body;
 
   if (!topic) {
     return res.status(400).json({ error: 'Missing required field: topic' });
+  }
+  if (topic === 'other' && !customTopic?.trim()) {
+    return res.status(400).json({ error: 'Missing required field: customTopic' });
   }
   if (!electorate) {
     return res.status(400).json({ error: 'Missing required field: electorate' });
@@ -152,7 +157,7 @@ app.post('/api/generate-email', async (req, res) => {
   }
 
   // 3. Call Groq
-  const prompt = buildPrompt({ topic, electorate, primaryRole, recipients });
+  const prompt = buildPrompt({ topic, customTopic, electorate, primaryRole, recipients });
 
   let groqRes;
   try {
