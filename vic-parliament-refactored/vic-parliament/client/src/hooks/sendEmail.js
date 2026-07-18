@@ -2,8 +2,8 @@
 import emailjs from '@emailjs/browser';
 
 // Initialize with your Public Key (from EmailJS dashboard)
-const PUBLIC_KEY = "q - ZlQNUARbTo0WPPv";
-emailjs.init(PUBLIC_KEY);
+
+emailjs.init("q - ZlQNUARbTo0WPPv");
 
 
 export async function sendViaEmailjs(toEmails, ccEmail, subject, body) {
