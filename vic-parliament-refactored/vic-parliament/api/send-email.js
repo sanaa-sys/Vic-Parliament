@@ -3,7 +3,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = 'onboarding@resend.dev';
+const FROM_EMAIL = 'stophate.cip@gmail.com';
 
 export default async function handler(req, res) {
     // Only allow POST
