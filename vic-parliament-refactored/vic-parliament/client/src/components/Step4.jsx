@@ -2,6 +2,7 @@
 import { useState } from 'react';
 
 const CC_EMAIL = 'jazeer@boiv.org.au';
+import { sendViaEmailjs } from '../hooks/sendEmail';
 
 export default function Step4({ selection, email, onBack }) {
     const { selected } = selection;
@@ -14,33 +15,17 @@ export default function Step4({ selection, email, onBack }) {
     const [sending, setSending] = useState(false);
     const [sendResult, setSendResult] = useState(null); // {ok, message}
 
-    // ── Anonymous send via Resend (/api/send-email) ───────────────────────
+    // ── Anonymous send via EmailJS ───────────────────────
     async function sendAnonymously() {
         if (!allEmails.length) { alert('No email addresses found.'); return; }
         setSending(true);
         setSendResult(null);
 
         try {
-            const res = await fetch('/api/send-email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    to: allEmails,
-                    cc: [CC_EMAIL],
-                    subject: subject,
-                    emailBody: body,
-                }),
-            });
-
-            const data = await res.json();
-
-            if (res.ok && data.success) {
-                setSendResult({ ok: true, message: data.message });
-            } else {
-                setSendResult({ ok: false, message: data.error || 'Send failed. Please try another option.' });
-            }
+            const result = await sendViaEmailjs(allEmails, CC_EMAIL, subject, body);
+            setSendResult(result);
         } catch (err) {
-            setSendResult({ ok: false, message: `Network error: ${err.message}. Please try another option.` });
+            setSendResult({ ok: false, message: `Error: ${err.message}` });
         } finally {
             setSending(false);
         }
