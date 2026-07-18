@@ -25,8 +25,8 @@ export async function sendViaEmailjs(toEmails, ccEmail, subject, body) {
 
     try {
         const response = await emailjs.send(
-            process.env.EMAILJS_SERVICE_ID,
-            process.env.EMAILJS_TEMPLATE_ID,
+            "service_7us3jze",
+            "template_3a0rs3i",
             templateParams
         );
 
