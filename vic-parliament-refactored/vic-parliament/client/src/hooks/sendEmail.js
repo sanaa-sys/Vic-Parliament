@@ -2,13 +2,9 @@
 import emailjs from '@emailjs/browser';
 
 // Initialize with your Public Key (from EmailJS dashboard)
-const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+const PUBLIC_KEY = "q - ZlQNUARbTo0WPPv";
+emailjs.init(PUBLIC_KEY);
 
-if (PUBLIC_KEY) {
-    emailjs.init("q - ZlQNUARbTo0WPPv");
-} else {
-    console.warn('⚠️ EmailJS Public Key not found. Check .env.local');
-}
 
 export async function sendViaEmailjs(toEmails, ccEmail, subject, body) {
     if (!toEmails || toEmails.length === 0) {
