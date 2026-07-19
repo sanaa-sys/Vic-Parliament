@@ -9,6 +9,7 @@ import { isDataLoaded, lookupPostcode } from '../hooks/useMembers';
 import SuburbPicker  from './SuburbPicker';
 import StatePicker   from './StatePicker';
 import CouncilPicker from './CouncilPicker';
+import { UNIVERSITIES } from '../data/universities';
 
 const TOPICS = [
   { value: 'islamophobia', label: 'Islamophobia & anti-Muslim hate' },
@@ -17,7 +18,7 @@ const TOPICS = [
   { value: 'housing',       label: 'Housing affordability' },
   { value: 'health',        label: 'Healthcare & hospitals' },
   { value: 'transport',     label: 'Public transport' },
-  { value: 'education',     label: 'Education & schools' },
+  { value: 'education',     label: 'Education & universities' },
   { value: 'cost',          label: 'Cost of living' },
   { value: 'other',         label: 'Other' },
 ];
@@ -31,6 +32,7 @@ export default function Step1({ onNext }) {
   const [error,       setError]       = useState('');
   const [stage,    setStage]    = useState(STAGE.NONE);
   const [lookup,   setLookup]   = useState(null);
+    const [university, setUniversity] = useState(''); 
 
   // State district multi data
   const [districtData,  setDistrictData]  = useState(null);
@@ -80,7 +82,8 @@ export default function Step1({ onNext }) {
     const baseLookup = {
       postcode,
       topic: topic || 'other',
-      ...(topic === 'other' && { customTopic: customTopic.trim() }),
+        ...(topic === 'other' && { customTopic: customTopic.trim() }),
+        ...(topic === 'education' && university && { university }),
       ...result,
     };
     setLookup(baseLookup);
@@ -312,7 +315,26 @@ export default function Step1({ onNext }) {
               Your topic will be used to generate a personalised email draft
             </div>
           </>
-        )}
+              )}
+              {topic === 'education' && (
+                  <div className="card">
+                      <div className="label">Select a university (optional)</div>
+                      <select
+                          value={university}
+                          onChange={e => { setUniversity(e.target.value); setError(''); }}
+                      >
+                          <option value="">Select a university…</option>
+                          {UNIVERSITIES.map(u => (
+                              <option key={u.university} value={u.university}>
+                                  {u.university}
+                              </option>
+                          ))}
+                      </select>
+                      <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                          Select a university to also include its Vice-Chancellor as a recipient
+                      </div>
+                  </div>
+              )}
       </div>
 
       {stage === STAGE.NONE && (

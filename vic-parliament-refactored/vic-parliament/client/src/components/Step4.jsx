@@ -4,6 +4,7 @@ import { useState } from 'react';
 const CC_EMAIL = 'jazeer@boiv.org.au';
 import { sendViaEmailjs } from '../hooks/sendEmail';
 
+
 export default function Step4({ selection, email, onBack }) {
     const { selected } = selection;
     const { subject, body } = email;
@@ -74,8 +75,9 @@ export default function Step4({ selection, email, onBack }) {
             : m.chamber === 'assembly' ? 'State Assembly'
                 : m.chamber === 'council' ? 'State Council'
                     : m.chamber === 'lga' ? `${m.council || 'Local Council'} Mayor`
-                        : 'Federal Representative';
-        return `${m.name} — ${role} · ${m.party}`;
+                        : m.chamber === 'university' ? `${m.university} ${m.position || 'Vice-Chancellor'}`
+                            : 'Federal Representative';
+        return `${m.name} — ${role}${m.party ? ` · ${m.party}` : ''}`;
     });
 
     return (
