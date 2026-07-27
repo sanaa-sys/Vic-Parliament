@@ -272,6 +272,25 @@ export default function Step1({ onNext }) {
         </div>
       )}
 
+          <div className="card">
+              <div className="label">Select a university (optional)</div>
+              <select
+                  value={university}
+                  onChange={e => { setUniversity(e.target.value); setError(''); }}
+              >
+                  <option value="">Select a university…</option>
+                  {UNIVERSITIES.map(u => (
+                      <option key={u.university} value={u.university}>
+                          {u.university}
+                      </option>
+                  ))}
+                  <option value="">N/A — Do not contact university</option>
+
+              </select>
+              <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                  Select a university to also include its Vice-Chancellor as a recipient
+              </div>
+          </div>
       <div className="card">
         <div className="label">Your Victorian postcode</div>
         <input
@@ -316,25 +335,8 @@ export default function Step1({ onNext }) {
             </div>
           </>
               )}
-              {topic === 'education' && (
-                  <div className="card">
-                      <div className="label">Select a university (optional)</div>
-                      <select
-                          value={university}
-                          onChange={e => { setUniversity(e.target.value); setError(''); }}
-                      >
-                          <option value="">Select a university…</option>
-                          {UNIVERSITIES.map(u => (
-                              <option key={u.university} value={u.university}>
-                                  {u.university}
-                              </option>
-                          ))}
-                      </select>
-                      <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-secondary)' }}>
-                          Select a university to also include its Vice-Chancellor as a recipient
-                      </div>
-                  </div>
-              )}
+
+              
       </div>
 
       {stage === STAGE.NONE && (

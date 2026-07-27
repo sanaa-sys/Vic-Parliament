@@ -67,6 +67,7 @@ export default function App() {
         <Step4
           selection={selection}
           email={email}
+          lookup={lookup}
           onBack={() => goStep(3)}
         />
       )}

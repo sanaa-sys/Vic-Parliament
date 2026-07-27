@@ -1,11 +1,16 @@
 // src/components/Step4.jsx
 import { useState } from 'react';
 
-const CC_EMAIL = 'jazeer@boiv.org.au';
+
 import { sendViaEmailjs } from '../hooks/sendEmail';
+const ccEmails = ['jazeer@boiv.org.au'];
+if (lookup?.topic === 'islamophobia') {
+    ccEmails.push('support@actionagainstislamophobia.org.au');
+    ccEmails.push('contact@islamophobia.com.au');
+}
+const CC_EMAIL = ccEmails.join(', ');
 
-
-export default function Step4({ selection, email, onBack }) {
+export default function Step4({ selection, email, lookup,  onBack }) {
     const { selected } = selection;
     const { subject, body } = email;
 
