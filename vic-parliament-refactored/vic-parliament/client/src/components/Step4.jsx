@@ -8,6 +8,7 @@ import { sendViaEmailjs } from '../hooks/sendEmail';
 export default function Step4({ selection, email, lookup, onBack }) {
     const ccEmails = ['jazeer@boiv.org.au'];
     if (lookup?.topic === 'islamophobia') {
+        ccEmails[0] = ('islamophobia@boiv.org.au');
         ccEmails.push('support@actionagainstislamophobia.org.au');
         ccEmails.push('contact@islamophobia.com.au');
     }
