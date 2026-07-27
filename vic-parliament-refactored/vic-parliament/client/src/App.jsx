@@ -63,7 +63,7 @@ export default function App() {
         />
       )}
 
-      {step === 4 && selection && email && (
+          {step === 4 && selection && lookup && email && (
         <Step4
           selection={selection}
           email={email}

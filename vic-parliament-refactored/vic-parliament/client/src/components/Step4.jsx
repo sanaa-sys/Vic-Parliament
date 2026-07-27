@@ -3,14 +3,15 @@ import { useState } from 'react';
 
 
 import { sendViaEmailjs } from '../hooks/sendEmail';
-const ccEmails = ['jazeer@boiv.org.au'];
-if (lookup?.topic === 'islamophobia') {
-    ccEmails.push('support@actionagainstislamophobia.org.au');
-    ccEmails.push('contact@islamophobia.com.au');
-}
-const CC_EMAIL = ccEmails.join(', ');
 
-export default function Step4({ selection, email, lookup,  onBack }) {
+
+export default function Step4({ selection, email, lookup, onBack }) {
+    const ccEmails = ['jazeer@boiv.org.au'];
+    if (lookup?.topic === 'islamophobia') {
+        ccEmails.push('support@actionagainstislamophobia.org.au');
+        ccEmails.push('contact@islamophobia.com.au');
+    }
+    const CC_EMAIL = ccEmails.join(', ');
     const { selected } = selection;
     const { subject, body } = email;
 
