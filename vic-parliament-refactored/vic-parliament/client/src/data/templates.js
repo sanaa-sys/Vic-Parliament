@@ -202,22 +202,40 @@ A constituent`,
   ],
 };
 
-export function getTemplateFallback(topic, salutation, electorate, customTopic) {
+export function getTemplateFallback(topic, salutation, electorate, customTopic, incidentDetails, desiredOutcome) {
   const tpls = TEMPLATES[topic] || TEMPLATES.other;
   const tpl  = tpls[Math.floor(Math.random() * tpls.length)];
   const topicLabel = topic === 'other' && customTopic?.trim() ? customTopic.trim() : null;
+  let body = topicLabel
+    ? tpl.body.replace(
+        'an important matter to your attention.',
+        `the following matter: ${topicLabel}.`,
+      )
+    : tpl.body;
+
+  if (topic === 'islamophobia' && (incidentDetails?.trim() || desiredOutcome?.trim())) {
+    const extra = [
+      incidentDetails?.trim() && `Incident details: ${incidentDetails.trim()}`,
+      desiredOutcome?.trim() && `Desired outcome: ${desiredOutcome.trim()}`,
+    ].filter(Boolean).join('\n\n');
+    body = body.replace(
+      'I look forward to your response.',
+      `${extra}\n\nI look forward to your response.`,
+    );
+    if (!body.includes(extra)) {
+      body = body.replace(
+        'Yours sincerely,',
+        `${extra}\n\nYours sincerely,`,
+      );
+    }
+  }
+
   return {
     subject: (topicLabel
       ? `Concern: ${topicLabel}`
       : tpl.subject
     ).replace(/{electorate}/g, electorate),
-    body:    (topicLabel
-      ? tpl.body.replace(
-          'an important matter to your attention.',
-          `the following matter: ${topicLabel}.`,
-        )
-      : tpl.body
-    )
+    body: body
       .replace(/{role}/g, salutation)
       .replace(/{electorate}/g, electorate),
   };

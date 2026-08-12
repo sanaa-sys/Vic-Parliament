@@ -38,7 +38,7 @@ function roleToSalutation(role) {
   return 'Dear Member,';
 }
 
-function buildPrompt({ topic, customTopic, electorate, primaryRole, recipients }) {
+function buildPrompt({ topic, customTopic, incidentDetails, desiredOutcome, electorate, primaryRole, recipients }) {
   const topicLabel     = (topic === 'other' && customTopic?.trim())
     ? customTopic.trim()
     : (TOPIC_LABELS[topic] || topic);
@@ -47,12 +47,21 @@ function buildPrompt({ topic, customTopic, electorate, primaryRole, recipients }
     .map(r => `- ${r.name} (${r.role}, ${r.party})`)
     .join('\n') || '(none selected)';
 
+  const islamophobiaContext = (topic === 'islamophobia' && (incidentDetails?.trim() || desiredOutcome?.trim()))
+    ? `
+
+The constituent has provided the following details. Base the email on these — do not invent extra facts:
+${incidentDetails?.trim() ? `- Incident details: ${incidentDetails.trim()}` : ''}
+${desiredOutcome?.trim() ? `- Desired outcome: ${desiredOutcome.trim()}` : ''}
+Incorporate the incident details into the body and turn the desired outcome into clear, actionable requests.`
+    : '';
+
   return `You are helping an Australian constituent write a formal email to their elected representatives about ${topicLabel}.
 
 The primary recipient holds the role of ${primaryRole} for the electorate of ${electorate}.
 
 All recipients:
-${recipientLines}
+${recipientLines}${islamophobiaContext}
 
 Write a formal, respectful constituent email on the topic of ${topicLabel}. The email should:
 - Open with exactly "${salutation}" on its own line — address by role, NOT by name
@@ -80,11 +89,17 @@ export default async function handler(req, res) {
   }
 
   // 2. Validate request body
-  const { topic, customTopic, electorate, primaryRole, recipients } = req.body;
+  const { topic, customTopic, incidentDetails, desiredOutcome, electorate, primaryRole, recipients } = req.body;
 
   if (!topic)       return res.status(400).json({ error: 'Missing required field: topic' });
   if (topic === 'other' && !customTopic?.trim()) {
     return res.status(400).json({ error: 'Missing required field: customTopic' });
+  }
+  if (topic === 'islamophobia' && !incidentDetails?.trim()) {
+    return res.status(400).json({ error: 'Missing required field: incidentDetails' });
+  }
+  if (topic === 'islamophobia' && !desiredOutcome?.trim()) {
+    return res.status(400).json({ error: 'Missing required field: desiredOutcome' });
   }
   if (!electorate)  return res.status(400).json({ error: 'Missing required field: electorate' });
   if (!primaryRole) return res.status(400).json({ error: 'Missing required field: primaryRole' });
@@ -93,7 +108,7 @@ export default async function handler(req, res) {
   }
 
   // 3. Call Groq
-  const prompt = buildPrompt({ topic, customTopic, electorate, primaryRole, recipients });
+  const prompt = buildPrompt({ topic, customTopic, incidentDetails, desiredOutcome, electorate, primaryRole, recipients });
 
   let groqRes;
   try {

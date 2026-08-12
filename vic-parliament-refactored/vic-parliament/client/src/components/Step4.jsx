@@ -22,6 +22,7 @@ export default function Step4({ selection, email, lookup, onBack }) {
     const [copied, setCopied] = useState({});
     const [sending, setSending] = useState(false);
     const [sendResult, setSendResult] = useState(null); // {ok, message}
+    const [phone, setPhone] = useState('');
 
     // ── Anonymous send via EmailJS ───────────────────────
     async function sendAnonymously() {
@@ -30,7 +31,7 @@ export default function Step4({ selection, email, lookup, onBack }) {
         setSendResult(null);
 
         try {
-            const result = await sendViaEmailjs(allEmails, CC_EMAIL, subject, body);
+            const result = await sendViaEmailjs(allEmails, CC_EMAIL, subject, body, phone);
             setSendResult(result);
         } catch (err) {
             setSendResult({ ok: false, message: `Error: ${err.message}` });
@@ -113,13 +114,32 @@ export default function Step4({ selection, email, lookup, onBack }) {
                     <strong style={{ color: 'var(--color-text)' }}>Send email</strong> — opens your default
                     email app (Gmail, Outlook, Apple Mail) with everything pre-filled.
                     All options automatically CC <strong>{CC_EMAIL}</strong>.
+                    Your phone number is never included in the email to representatives (Applicable to complaints for islamophobia).
                     <br /><br />
                     <strong style={{ color: 'var(--color-text)' }}>No default email app setup</strong> — You can
                     copy and paste all fields manually using the <strong>Copy button</strong> beside each field below.
                     <br /><br />
-                
+
                 </div>
             </div>
+            {lookup?.topic === 'islamophobia' && (
+                <div className="card" style={{ marginBottom: 12 }}>
+                    {/* Phone — CC only */}
+                    <div className="label">Phone number (optional)</div>
+                    <input
+                        type="tel"
+                        value={phone}
+                        onChange={e => setPhone(e.target.value)}
+                        placeholder="e.g. 0412 345 678"
+                        autoComplete="tel"
+                    />
+                    <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                        Sent only to CC addresses, not to representatives. Use{' '}
+                        <strong>Send anonymously</strong> to deliver it automatically.
+                    </div>
+                </div>
+            )}
+
 
             {/* ── Anonymous send result ────────────────────────────────────────── */}
             {sendResult && (
@@ -145,6 +165,11 @@ export default function Step4({ selection, email, lookup, onBack }) {
                     { field: 'cc', label: 'Cc', text: CC_EMAIL },
                     { field: 'subject', label: 'Subject', text: subject },
                     { field: 'body', label: 'Message body', text: body },
+                    ...(phone.trim() ? [{
+                        field: 'phone',
+                        label: 'Phone — CC only (do not include in the email to representatives)',
+                        text: `This message is for CC recipients only and was not included in the email to representatives.\n\nConstituent callback number: ${phone.trim()}`,
+                    }] : []),
                 ].map(({ field, label, text }) => (
                     <div key={field} style={{ marginBottom: 8 }}>
                         <div style={{ fontSize: 11, color: 'var(--color-text-secondary)', marginBottom: 4 }}>

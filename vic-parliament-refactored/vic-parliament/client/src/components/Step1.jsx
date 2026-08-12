@@ -26,10 +26,12 @@ const TOPICS = [
 const STAGE = { NONE: 'none', FEDERAL: 'federal', DISTRICT: 'district', COUNCIL: 'council' };
 
 export default function Step1({ onNext }) {
-  const [postcode,    setPostcode]    = useState('');
-  const [topic,       setTopic]       = useState('');
-  const [customTopic, setCustomTopic] = useState('');
-  const [error,       setError]       = useState('');
+  const [postcode,        setPostcode]        = useState('');
+  const [topic,           setTopic]           = useState('');
+  const [customTopic,     setCustomTopic]     = useState('');
+  const [incidentDetails, setIncidentDetails] = useState('');
+  const [desiredOutcome,  setDesiredOutcome]  = useState('');
+  const [error,           setError]           = useState('');
   const [stage,    setStage]    = useState(STAGE.NONE);
   const [lookup,   setLookup]   = useState(null);
     const [university, setUniversity] = useState(''); 
@@ -78,12 +80,24 @@ export default function Step1({ onNext }) {
       setError('Please describe your topic.');
       return;
     }
+    if (topic === 'islamophobia' && !incidentDetails.trim()) {
+      setError('Please describe the incident details.');
+      return;
+    }
+    if (topic === 'islamophobia' && !desiredOutcome.trim()) {
+      setError('Please describe the desired outcome.');
+      return;
+    }
 
     const baseLookup = {
       postcode,
       topic: topic || 'other',
-        ...(topic === 'other' && { customTopic: customTopic.trim() }),
-        ...(topic === 'education' && university && { university }),
+      ...(topic === 'other' && { customTopic: customTopic.trim() }),
+      ...(topic === 'islamophobia' && {
+        incidentDetails: incidentDetails.trim(),
+        desiredOutcome:  desiredOutcome.trim(),
+      }),
+      ...(topic === 'education' && university && { university }),
       ...result,
     };
     setLookup(baseLookup);
@@ -315,6 +329,10 @@ export default function Step1({ onNext }) {
           onChange={e => {
             setTopic(e.target.value);
             if (e.target.value !== 'other') setCustomTopic('');
+            if (e.target.value !== 'islamophobia') {
+              setIncidentDetails('');
+              setDesiredOutcome('');
+            }
           }}
         >
           <option value="">Select a topic…</option>
@@ -334,9 +352,28 @@ export default function Step1({ onNext }) {
               Your topic will be used to generate a personalised email draft
             </div>
           </>
-              )}
-
-              
+        )}
+        {topic === 'islamophobia' && (
+          <>
+            <div className="label" style={{ marginTop: 14 }}>Incident details</div>
+            <textarea
+              value={incidentDetails}
+              onChange={e => { setIncidentDetails(e.target.value); setError(''); }}
+              placeholder="What happened? Include when, where, and any relevant context…"
+              style={{ marginTop: 6, minHeight: 88 }}
+            />
+            <div className="label" style={{ marginTop: 14 }}>Desired outcome</div>
+            <textarea
+              value={desiredOutcome}
+              onChange={e => { setDesiredOutcome(e.target.value); setError(''); }}
+              placeholder="What would you like representatives to do?"
+              style={{ marginTop: 6, minHeight: 88 }}
+            />
+            <div style={{ marginTop: 8, fontSize: 12, color: 'var(--color-text-secondary)' }}>
+              These details will be used to generate a personalised email draft
+            </div>
+          </>
+        )}
       </div>
 
       {stage === STAGE.NONE && (
