@@ -2,7 +2,7 @@
 
 **WriteEZ** is a Victorian constituent contact platform that helps residents find their elected representatives across federal, state, and local government (and optionally university leadership), then draft and send a personalised email about an issue they care about.
 
-**Live site:** https://sanaa-sys.github.io/Vic-Parliament/
+**Live site:** https://writeez.vercel.app/
 
 ---
 
@@ -46,6 +46,7 @@ When **Other** is selected, the user must enter a topic description. This custom
 - Dropdown of Australian universities with Vice-Chancellor contact details
 - Option to skip university contact (“N/A — Do not contact university”)
 - Selected university’s Vice-Chancellor can be added as a recipient in Step 2
+- Data Source: https://universitiesaustralia.edu.au/our-universities/university-contacts/#type=university-vice-chancellors
 
 ### Multi-stage location disambiguation
 
