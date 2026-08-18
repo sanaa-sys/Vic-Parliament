@@ -1,15 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { PostHogProvider } from 'posthog-js/react';
 import { Analytics } from '@vercel/analytics/react';
 import App from './App';
 import './index.css';
+import { initPostHog, posthog, posthogEnabled } from './lib/posthog';
+
+if (posthogEnabled) initPostHog();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <App />
-        {/* Vercel Analytics — tracks page views and custom events */}
-        <Analytics />
-
+        <PostHogProvider client={posthog}>
+            <App />
+            {/* Vercel Analytics — tracks page views and custom events */}
+            <Analytics />
+        </PostHogProvider>
     </React.StrictMode>
 );
 

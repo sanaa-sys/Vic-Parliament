@@ -1,10 +1,11 @@
 // src/App.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProgressBar from './components/ProgressBar';
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 import Step4 from './components/Step4';
+import { capture } from './lib/posthog';
 
 
 
@@ -14,6 +15,10 @@ export default function App() {
   const [selection, setSelection] = useState(null);  // chosen recipients
   const [email,     setEmail]     = useState(null);  // subject + body
 
+  useEffect(() => {
+    capture('funnel_step_viewed', { step });
+  }, [step]);
+
   function goStep(n) {
     setStep(n);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -22,18 +27,28 @@ export default function App() {
   // Step 1 → 2: postcode resolved
   function handleStep1(data) {
     setLookup(data);
+    capture('funnel_step_completed', {
+      step: 1,
+      postcode: data.postcode,
+      topic: data.topic,
+    });
     goStep(2);
   }
 
   // Step 2 → 3: recipients chosen
   function handleStep2(data) {
     setSelection(data);
+    capture('funnel_step_completed', {
+      step: 2,
+      recipient_count: data.selected?.length ?? 0,
+    });
     goStep(3);
   }
 
   // Step 3 → 4: email drafted
   function handleStep3(data) {
     setEmail(data);
+    capture('funnel_step_completed', { step: 3 });
     goStep(4);
   }
 

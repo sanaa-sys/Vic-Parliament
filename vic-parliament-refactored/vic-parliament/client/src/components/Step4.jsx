@@ -1,8 +1,8 @@
 // src/components/Step4.jsx
 import { useState } from 'react';
 
-
 import { sendViaEmailjs } from '../hooks/sendEmail';
+import { capture } from '../lib/posthog';
 
 
 export default function Step4({ selection, email, lookup, onBack }) {
@@ -29,12 +29,23 @@ export default function Step4({ selection, email, lookup, onBack }) {
         if (!allEmails.length) { alert('No email addresses found.'); return; }
         setSending(true);
         setSendResult(null);
+        capture('email_send_attempted', { method: 'emailjs', recipient_count: allEmails.length });
 
         try {
             const result = await sendViaEmailjs(allEmails, CC_EMAIL, subject, body, phone);
             setSendResult(result);
+            capture('email_send_result', {
+                method: 'emailjs',
+                success: result.ok,
+                recipient_count: allEmails.length,
+            });
         } catch (err) {
             setSendResult({ ok: false, message: `Error: ${err.message}` });
+            capture('email_send_result', {
+                method: 'emailjs',
+                success: false,
+                error: err.message,
+            });
         } finally {
             setSending(false);
         }
@@ -48,6 +59,7 @@ export default function Step4({ selection, email, lookup, onBack }) {
 
     function sendMailto() {
         if (!allEmails.length) { alert('No email addresses found.'); return; }
+        capture('email_send_attempted', { method: 'mailto', recipient_count: allEmails.length });
         setShowMailtoNote(false);
         setTimeout(() => setShowMailtoNote(true), 2500);
         window.location.href = buildMailto(allEmails);
