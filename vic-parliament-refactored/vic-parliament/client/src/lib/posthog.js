@@ -13,6 +13,12 @@ export function initPostHog() {
     person_profiles: 'identified_only',
     capture_pageview: true,
     capture_pageleave: true,
+    session_recording: {
+      // PostHog blurs all inputs by default. Unmask postcode/topic via
+      // className "ph-no-mask"; keep passwords and other inputs hidden.
+      maskAllInputs: true,
+      maskInputOptions: { password: true },
+    },
   });
 
   return posthog;
