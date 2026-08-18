@@ -8,7 +8,7 @@
 //   Project → Settings → Environment Variables
 
 const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_MODEL = 'qwen-qwq-32b';
+const GROQ_MODEL = 'qwen/qwen3.6-27b';
 
 const TOPIC_LABELS = {
   islamophobia:  'Islamophobia and anti-Muslim hate in Australia',
