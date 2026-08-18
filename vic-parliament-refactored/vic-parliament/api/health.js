@@ -5,7 +5,7 @@ export default function handler(req, res) {
   res.status(200).json({
     status:    'ok',
     timestamp: new Date().toISOString(),
-    model:     'llama-3.1-8b-instant',
+    model:     'qwen/qwen3.6-27b',
     groq:      !!process.env.GROQ_API_KEY,
     runtime:   'vercel-functions',
   });
