@@ -308,7 +308,7 @@ export default function Step1({ onNext }) {
       <div className="card">
         <div className="label">Your Victorian postcode</div>
         <input
-          type="text" className="postcode-input ph-no-mask"
+          type="text" className="postcode-input"
           placeholder="e.g. 3000, 3029, 3182…"
           maxLength={4} inputMode="numeric" value={postcode}
           onChange={e => { setPostcode(e.target.value); setError(''); setStage(STAGE.NONE); }}
@@ -325,7 +325,6 @@ export default function Step1({ onNext }) {
       <div className="card">
         <div className="label">What's this about?</div>
         <select
-          className="ph-no-mask"
           value={topic}
           onChange={e => {
             setTopic(e.target.value);
@@ -343,7 +342,6 @@ export default function Step1({ onNext }) {
           <>
             <input
               type="text"
-              className="ph-no-mask"
               value={customTopic}
               onChange={e => { setCustomTopic(e.target.value); setError(''); }}
               placeholder="Describe your topic…"
