@@ -2,10 +2,11 @@
 // Postcode entry + disambiguation stages:
 //   Stage 1: Federal electorate picker  (if spans multiple federal divisions)
 //   Stage 2: State Assembly district picker (if spans multiple districts)
-//   Stage 3: Council / ward picker (always shown — may span multiple councils)
+//   Stage 3: Legislative Council region picker (if spans multiple regions)
+//   Stage 4: Council / ward picker (always shown — may span multiple councils)
 
 import { useState, useEffect } from 'react';
-import { isDataLoaded, lookupPostcode } from '../hooks/useMembers';
+import { isDataLoaded, lookupPostcode, getCouncilMembers } from '../hooks/useMembers';
 import SuburbPicker  from './SuburbPicker';
 import StatePicker   from './StatePicker';
 import CouncilPicker from './CouncilPicker';
@@ -23,7 +24,56 @@ const TOPICS = [
   { value: 'other',         label: 'Other' },
 ];
 
-const STAGE = { NONE: 'none', FEDERAL: 'federal', DISTRICT: 'district', COUNCIL: 'council' };
+const STAGE = { NONE: 'none', FEDERAL: 'federal', DISTRICT: 'district', REGION: 'region', COUNCIL: 'council' };
+
+/** Vicmap LGA layer uses short names ("Melbourne"), not "Melbourne City Council". */
+function lgaShortName(name) {
+  return String(name || '')
+    .replace(/\s+Council$/i, '')
+    .replace(/\s+(Rural City|City|Shire|Borough)$/i, '')
+    .trim();
+}
+
+function withHttp(url) {
+  if (!url) return '';
+  return /^https?:\/\//i.test(url) ? url : `https://${url}`;
+}
+
+function formatCouncilAddress(contact) {
+  if (!contact) return '';
+  return [contact.street_address, contact.suburb, contact.postcode]
+    .filter(Boolean)
+    .join(', ');
+}
+
+/** Flatten local_council_list.json ({ lgas: [...] }) into { [councilName]: { mayor, email, shortName, ... } }. */
+function indexLocalCouncilList(raw) {
+  const lgas = Array.isArray(raw?.lgas) ? raw.lgas : (Array.isArray(raw) ? raw : []);
+  const map = {};
+  for (const lga of lgas) {
+    const name = lga?.name;
+    if (!name) continue;
+    const cd = lga.contact_data || {};
+    const contact = cd.contact || {};
+    const mayor = cd.mayor || {};
+    const ceo = cd.ceo || {};
+    const deputyMayor = typeof cd.deputy_mayor === 'string'
+      ? cd.deputy_mayor
+      : (cd.deputy_mayor?.name || '');
+    map[name] = {
+      shortName: lgaShortName(name),
+      mayor: mayor.name || '',
+      mayorTitle: mayor.title || (mayor.is_administrator ? 'Administrator' : 'Mayor'),
+      ceo: ceo.name || '',
+      deputyMayor: deputyMayor.trim(),
+      phone: contact.phone || '',
+      email: contact.email || '',
+      website: withHttp(contact.website),
+      address: formatCouncilAddress(contact),
+    };
+  }
+  return map;
+}
 
 export default function Step1({ onNext }) {
   const [postcode,        setPostcode]        = useState('');
@@ -36,9 +86,8 @@ export default function Step1({ onNext }) {
   const [lookup,   setLookup]   = useState(null);
     const [university, setUniversity] = useState(''); 
 
-  // State district multi data
-  const [districtData,  setDistrictData]  = useState(null);
   const [districtsList, setDistrictsList] = useState(null);
+  const [regionsList,   setRegionsList]   = useState(null);
 
   // Council data
   const [councilData,    setCouncilData]    = useState(null); // {councilName: {mayor,...}}
@@ -47,17 +96,23 @@ export default function Step1({ onNext }) {
   // Pending selections for multi-step navigation
   const [pendingFederal,  setPendingFederal]  = useState(null);
   const [pendingDistrict, setPendingDistrict] = useState(null);
+  const [pendingRegion,   setPendingRegion]   = useState(null);
   const [pendingCouncil,  setPendingCouncil]  = useState(null);
 
-  function countDistricts(pc) {
-    if (!pc || !districtData) return districtsList?.length ?? 0;
-    return Object.keys(districtData[pc] || {}).length;
+  function countDistricts() {
+    return lookup?.districts?.length || districtsList?.length || 0;
   }
 
-  // Load state and council data on mount
+  function countRegions() {
+    return lookup?.regions?.length || regionsList?.length || 0;
+  }
+
+  // Load local council contact data on mount
   useEffect(() => {
-    fetch('/postcode_district_suburbs.json').then(r => r.json()).then(setDistrictData).catch(() => {});
-    fetch('/council_data.json').then(r => r.json()).then(setCouncilData).catch(() => {});
+    fetch('/local_council_list.json')
+      .then(r => r.json())
+      .then(raw => setCouncilData(indexLocalCouncilList(raw)))
+      .catch(() => {});
   }, []);
 
   function handleFind() {
@@ -101,20 +156,53 @@ export default function Step1({ onNext }) {
       ...result,
     };
     setLookup(baseLookup);
+    setDistrictsList(null);
+    setRegionsList(null);
     setPendingFederal(null);
     setPendingDistrict(null);
+    setPendingRegion(null);
     setPendingCouncil(null);
 
-    // Determine first stage needed
-    if (result.divisions.length > 1) {
-      setStage(STAGE.FEDERAL);
-    } else if (districtData && Object.keys(districtData[postcode] || {}).length > 1) {
-      setDistrictsList(Object.keys(districtData[postcode]));
-      setStage(STAGE.DISTRICT);
-    } else {
-      // Go straight to council picker
-      loadCouncilStage(postcode, baseLookup);
+    goToStage(firstAmbiguousStage(baseLookup), baseLookup, postcode);
+  }
+
+  function firstAmbiguousStage(result) {
+    if (result.divisions.length > 1) return STAGE.FEDERAL;
+    if (result.districts.length > 1) return STAGE.DISTRICT;
+    if (result.regions.length > 1)   return STAGE.REGION;
+    return STAGE.COUNCIL;
+  }
+
+  function stageAfter(current, currentLookup) {
+    if (current === STAGE.FEDERAL) {
+      if ((currentLookup.districts ?? []).length > 1) return STAGE.DISTRICT;
+      if ((currentLookup.regions ?? []).length > 1)   return STAGE.REGION;
+      return STAGE.COUNCIL;
     }
+    if (current === STAGE.DISTRICT) {
+      if ((currentLookup.regions ?? []).length > 1) return STAGE.REGION;
+      return STAGE.COUNCIL;
+    }
+    return STAGE.COUNCIL;
+  }
+
+  function goToStage(next, currentLookup, pc) {
+    const postcodeToUse = pc || currentLookup.postcode;
+    if (next === STAGE.FEDERAL) {
+      setStage(STAGE.FEDERAL);
+      return;
+    }
+    if (next === STAGE.DISTRICT) {
+      setDistrictsList(currentLookup.districts);
+      setStage(STAGE.DISTRICT);
+      return;
+    }
+    if (next === STAGE.REGION) {
+      setRegionsList(currentLookup.regions);
+      setStage(STAGE.REGION);
+      return;
+    }
+    loadCouncilStage(postcodeToUse, currentLookup);
   }
 
   function loadCouncilStage(pc, currentLookup) {
@@ -141,16 +229,7 @@ export default function Step1({ onNext }) {
       federalRep: window.REPRESENTATIVES?.[chosenDivision] ?? lookup.federalRep,
     };
     setLookup(updated);
-
-    const districtOptions = districtData
-      ? Object.keys(districtData[lookup.postcode] ?? {})
-      : [];
-    if (districtOptions.length > 1) {
-      setDistrictsList(districtOptions);
-      setStage(STAGE.DISTRICT);
-    } else {
-      loadCouncilStage(lookup.postcode, updated);
-    }
+    goToStage(stageAfter(STAGE.FEDERAL, updated), updated);
   }
 
   function handleDistrictSelected(chosenDistrict) {
@@ -159,6 +238,16 @@ export default function Step1({ onNext }) {
       ...lookup,
       district:       chosenDistrict,
       assemblyMember: asmMember,
+    };
+    setLookup(updated);
+    goToStage(stageAfter(STAGE.DISTRICT, updated), updated);
+  }
+
+  function handleRegionSelected(chosenRegion) {
+    const updated = {
+      ...lookup,
+      region:         chosenRegion,
+      councilMembers: getCouncilMembers(chosenRegion),
     };
     setLookup(updated);
     loadCouncilStage(lookup.postcode, updated);
@@ -185,16 +274,20 @@ export default function Step1({ onNext }) {
       setStage(STAGE.NONE);
       setLookup(null);
       setDistrictsList(null);
+      setRegionsList(null);
       setCouncilWardMap(null);
       setPendingFederal(null);
       setPendingDistrict(null);
+      setPendingRegion(null);
       setPendingCouncil(null);
       return;
     }
 
     if (stage === STAGE.DISTRICT) {
       setPendingDistrict(null);
+      setRegionsList(null);
       setCouncilWardMap(null);
+      setPendingRegion(null);
       setPendingCouncil(null);
       if (lookup?.divisions?.length > 1) {
         setStage(STAGE.FEDERAL);
@@ -207,12 +300,12 @@ export default function Step1({ onNext }) {
       return;
     }
 
-    if (stage === STAGE.COUNCIL) {
-      setPendingCouncil(null);
+    if (stage === STAGE.REGION) {
+      setPendingRegion(null);
       setCouncilWardMap(null);
-      const pc = lookup?.postcode;
-      if (countDistricts(pc) > 1) {
-        setDistrictsList(Object.keys(districtData[pc]));
+      setPendingCouncil(null);
+      if (countDistricts() > 1) {
+        setDistrictsList(lookup.districts);
         setStage(STAGE.DISTRICT);
         setPendingDistrict(lookup.district || null);
       } else if (lookup?.divisions?.length > 1) {
@@ -222,6 +315,30 @@ export default function Step1({ onNext }) {
         setStage(STAGE.NONE);
         setLookup(null);
         setDistrictsList(null);
+        setRegionsList(null);
+      }
+      return;
+    }
+
+    if (stage === STAGE.COUNCIL) {
+      setPendingCouncil(null);
+      setCouncilWardMap(null);
+      if (countRegions() > 1) {
+        setRegionsList(lookup.regions);
+        setStage(STAGE.REGION);
+        setPendingRegion(lookup.region || null);
+      } else if (countDistricts() > 1) {
+        setDistrictsList(lookup.districts);
+        setStage(STAGE.DISTRICT);
+        setPendingDistrict(lookup.district || null);
+      } else if (lookup?.divisions?.length > 1) {
+        setStage(STAGE.FEDERAL);
+        setPendingFederal(lookup.division || null);
+      } else {
+        setStage(STAGE.NONE);
+        setLookup(null);
+        setDistrictsList(null);
+        setRegionsList(null);
       }
     }
   }
@@ -231,6 +348,8 @@ export default function Step1({ onNext }) {
       handleFederalSelected(pendingFederal);
     } else if (stage === STAGE.DISTRICT && pendingDistrict) {
       handleDistrictSelected(pendingDistrict);
+    } else if (stage === STAGE.REGION && pendingRegion) {
+      handleRegionSelected(pendingRegion);
     } else if (stage === STAGE.COUNCIL && pendingCouncil) {
       handleCouncilSelected({ council: pendingCouncil });
     }
@@ -239,6 +358,7 @@ export default function Step1({ onNext }) {
   function canProceed() {
     if (stage === STAGE.FEDERAL)  return !!pendingFederal;
     if (stage === STAGE.DISTRICT) return !!pendingDistrict;
+    if (stage === STAGE.REGION)   return !!pendingRegion;
     if (stage === STAGE.COUNCIL)  return !!pendingCouncil;
     return false;
   }
@@ -251,7 +371,8 @@ export default function Step1({ onNext }) {
     if (!lookup) return 0;
     let n = 0;
     if (lookup.divisions?.length > 1) n++;
-    if (countDistricts(lookup.postcode) > 1) n++;
+    if (countDistricts() > 1) n++;
+    if (countRegions() > 1) n++;
     n++; // council always shown
     return n;
   })();
@@ -261,10 +382,17 @@ export default function Step1({ onNext }) {
   const stageNumber = (() => {
     if (stage === STAGE.FEDERAL) return 1;
     if (stage === STAGE.DISTRICT) return lookup?.divisions?.length > 1 ? 2 : 1;
+    if (stage === STAGE.REGION) {
+      let n = 1;
+      if (lookup?.divisions?.length > 1) n++;
+      if (countDistricts() > 1) n++;
+      return n;
+    }
     if (stage === STAGE.COUNCIL) {
       let n = 1;
       if (lookup?.divisions?.length > 1) n++;
-      if (countDistricts(lookup?.postcode) > 1) n++;
+      if (countDistricts() > 1) n++;
+      if (countRegions() > 1) n++;
       return n;
     }
     return 0;
@@ -409,6 +537,21 @@ export default function Step1({ onNext }) {
             multiStep={multiStep}
             selected={pendingDistrict}
             onSelectedChange={setPendingDistrict}
+          />
+        </>
+      )}
+
+      {stage === STAGE.REGION && regionsList && (
+        <>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text)', marginBottom: 8 }}>
+            Step {stageNumber} of {totalStages} — Legislative Council region
+          </div>
+          <StatePicker
+            postcode={postcode} mode="region" options={regionsList}
+            onSelect={handleRegionSelected}
+            multiStep={multiStep}
+            selected={pendingRegion}
+            onSelectedChange={setPendingRegion}
           />
         </>
       )}

@@ -282,9 +282,21 @@ export default function Step2({ lookup, onNext, onBack }) {
                                         </span>
                                     )}
                                 </div>
-                                <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 4 }}>
-                                    Mayor: {councilInfo.mayor}
-                                </div>
+                                {councilInfo.mayor && (
+                                    <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 4 }}>
+                                        {councilInfo.mayorTitle || 'Mayor'}: {councilInfo.mayor}
+                                    </div>
+                                )}
+                                {councilInfo.deputyMayor && (
+                                    <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: councilInfo.mayor ? 0 : 4 }}>
+                                        Deputy Mayor: {councilInfo.deputyMayor}
+                                    </div>
+                                )}
+                                {councilInfo.ceo && (
+                                    <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: (councilInfo.mayor || councilInfo.deputyMayor) ? 0 : 4 }}>
+                                        CEO: {councilInfo.ceo}
+                                    </div>
+                                )}
                                 {councilInfo.phone && (
                                     <div style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
                                         Phone: <a href={`tel:${councilInfo.phone}`} style={{ color: 'var(--color-accent)' }}>{councilInfo.phone}</a>

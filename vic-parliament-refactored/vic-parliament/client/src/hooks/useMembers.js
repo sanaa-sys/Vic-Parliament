@@ -26,12 +26,13 @@ export function isDataLoaded() {
             POSTCODE_DISTRICT_MAP && POSTCODE_REGION_MAP);
 }
 
-/** All federal divisions for a postcode — length > 1 means split */
+/** All federal divisions for a postcode — length > 1 means split.
+ *  Drop abolished/unknown seats (e.g. Higgins) that have no REPRESENTATIVES entry. */
 export function getDivisionsForPostcode(postcode) {
   const divs = POSTCODE_DIVISIONS_MAP?.[postcode];
-  if (divs?.length) return divs;
-  const single = POSTCODE_REP_MAP?.[postcode];
-  return single ? [single] : [];
+  const list = divs?.length ? divs : (POSTCODE_REP_MAP?.[postcode] ? [POSTCODE_REP_MAP[postcode]] : []);
+  const known = list.filter(d => REPRESENTATIVES[d]);
+  return known.length ? known : list;
 }
 
 /** All state Assembly districts for a postcode — length > 1 means split */
@@ -54,6 +55,7 @@ export function getRegionsForPostcode(postcode) {
  * Full postcode lookup. The caller checks:
  *   result.divisions.length > 1  → show federal SuburbPicker
  *   result.districts.length > 1  → show StatePicker (district)
+ *   result.regions.length > 1    → show StatePicker (region)
  */
 export function lookupPostcode(postcode) {
   const divisions = getDivisionsForPostcode(postcode);
@@ -71,11 +73,23 @@ export function lookupPostcode(postcode) {
     region,    regions,
     federalRep:     REPRESENTATIVES[division]  ?? null,
     assemblyMember: district ? (ASSEMBLY_MEMBERS[district] ?? null) : null,
-    councilMembers: region   ? (COUNCIL_MEMBERS[region]    ?? [])   : [],
+    councilMembers: region   ? getCouncilMembers(region)            : [],
     senators:       VIC_SENATORS,
   };
 }
 
 export function getRepForElectorate(name)    { return REPRESENTATIVES[name]  ?? null; }
 export function getAssemblyMember(district)  { return ASSEMBLY_MEMBERS[district] ?? null; }
-export function getCouncilMembers(region)    { return COUNCIL_MEMBERS[region]    ?? []; }
+/** data.js keys are "Northern Metropolitan Regional"; maps use "Northern Metropolitan". */
+export function getCouncilMembers(region) {
+  if (!region) return [];
+  if (COUNCIL_MEMBERS[region]?.length) return COUNCIL_MEMBERS[region];
+  const suffixed = region.endsWith(' Regional') ? region : `${region} Regional`;
+  if (COUNCIL_MEMBERS[suffixed]?.length) return COUNCIL_MEMBERS[suffixed];
+  const stripped = region.replace(/ Regional$/i, '');
+  const key = Object.keys(COUNCIL_MEMBERS).find(k => {
+    const base = k.replace(/ Regional$/i, '');
+    return base.toLowerCase() === stripped.toLowerCase();
+  });
+  return key ? (COUNCIL_MEMBERS[key] ?? []) : [];
+}

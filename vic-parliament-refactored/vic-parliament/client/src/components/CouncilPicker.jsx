@@ -3,7 +3,8 @@
 // Uses LeafletMap for all map rendering — no Leaflet code here.
 //
 // The ArcGIS LGA layer stores short names (e.g. "Melbourne" not
-// "Melbourne City Council"), so we use councilData[name].shortName for queries.
+// "Melbourne City Council"). Prefer councilData[name].shortName, otherwise
+// derive it from the full council name.
 //
 // PERFORMANCE: results are cached two ways so repeat loads are instant:
 //   1. In-memory Map  — survives for the lifetime of the page (fast, free)
@@ -25,6 +26,14 @@ const PALETTE = [
 const ARCGIS_BASE = 'https://services-ap1.arcgis.com/P744lA0wf4LlBZ84/ArcGIS/rest/services/Vicmap_Admin/FeatureServer';
 const LGA_LAYER   = 9;
 const LGA_NAME_FIELD = 'lga_name'; // confirmed field — no probe request needed
+
+function councilShortName(council, councilData) {
+  return councilData[council]?.shortName
+    || String(council || '')
+      .replace(/\s+Council$/i, '')
+      .replace(/\s+(Rural City|City|Shire|Borough)$/i, '')
+      .trim();
+}
 
 // ── In-memory cache (Map) — fastest, cleared on full page reload ──────────
 const memCache = new Map(); // shortName -> geojson feature
@@ -50,7 +59,7 @@ function saveSessionCache(cache) {
 }
 
 async function fetchCouncilFeatures(councils, councilData) {
-  const shortNames = councils.map(c => councilData[c]?.shortName || c);
+  const shortNames = councils.map(c => councilShortName(c, councilData));
 
   // Check caches first — only fetch shortNames we don't already have
   const sessionCache = loadSessionCache();
@@ -95,7 +104,7 @@ async function fetchCouncilFeatures(councils, councilData) {
   // Build the final features array from the (now fully populated) cache
   const features = councils
     .map(council => {
-      const shortName = (councilData[council]?.shortName || council).toUpperCase();
+      const shortName = councilShortName(council, councilData).toUpperCase();
       const feat = memCache.get(shortName);
       if (!feat) {
         console.warn(`CouncilPicker: no feature for "${council}" (shortName="${shortName}")`);
@@ -216,6 +225,10 @@ export default function CouncilPicker({
                     display: 'grid', gridTemplateColumns: 'auto 1fr',
                     gap: '5px 14px', alignItems: 'start',
                   }}>
+                    {info.deputyMayor && (<>
+                      <span style={{ color: 'var(--color-text-secondary)', whiteSpace: 'nowrap' }}>Deputy Mayor</span>
+                      <span>{info.deputyMayor}</span>
+                    </>)}
                     {info.ceo && (<>
                       <span style={{ color: 'var(--color-text-secondary)', whiteSpace: 'nowrap' }}>CEO</span>
                       <span>{info.ceo}</span>

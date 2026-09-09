@@ -1,0 +1,2511 @@
+{
+  "fetched_at": "2026-09-06T07:36:16.428038+00:00",
+  "source": "DataVic CKAN API (locality data)",
+  "count": 79,
+  "lgas": [
+    {
+      "name": "Alpine Shire Council",
+      "slug": "alpine-shire-council",
+      "contact_data": {
+        "council": "Alpine Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Will Jeremy",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Sarah Nicholas",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Gareth Graham",
+        "contact": {
+          "postal_address": "PO Box 139",
+          "postal_suburb": "BRIGHT",
+          "postcode": "3741",
+          "street_address": "Great Alpine Road",
+          "suburb": "BRIGHT",
+          "phone": "5755 0555",
+          "email": "info@alpineshire.vic.gov.au",
+          "website": "www.alpineshire.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.272488+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Ararat Rural City Council",
+      "slug": "ararat-rural-city-council",
+      "contact_data": {
+        "council": "Ararat Rural City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Dr Tim Harrison",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Bob Sanders",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Teli Kaur",
+        "contact": {
+          "postal_address": "PO Box 246",
+          "postal_suburb": "ARARAT",
+          "postcode": "3377",
+          "street_address": "59 Vincent Street",
+          "suburb": "ARARAT",
+          "phone": "5355 0200",
+          "email": "council@ararat.vic.gov.au",
+          "website": "www.ararat.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.272488+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Ballarat City Council",
+      "slug": "ballarat-city-council",
+      "contact_data": {
+        "council": "Ballarat City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Evan King",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Tracey Hargreaves",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Ben Taylor",
+        "contact": {
+          "postal_address": "PO Box 655",
+          "postal_suburb": "BALLARAT",
+          "postcode": "3353",
+          "street_address": "25 Armstrong Street South",
+          "suburb": "BALLARAT",
+          "phone": "5320 5500",
+          "email": "info@ballarat.vic.gov.au",
+          "website": "www.ballarat.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.272488+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Banyule City Council",
+      "slug": "banyule-city-council",
+      "contact_data": {
+        "council": "Banyule City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Allison Beckwith",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Alison Champion",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Rick Garotti",
+        "contact": {
+          "postal_address": "PO Box 94",
+          "postal_suburb": "GREENSBOROUGH",
+          "postcode": "3088",
+          "street_address": "1 Flintoff Street",
+          "suburb": "GREENSBOROUGH",
+          "phone": "9490 4222",
+          "email": "enquiries@banyule.vic.gov.au",
+          "website": "www.banyule.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.272488+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Bass Coast Shire Council",
+      "slug": "bass-coast-shire-council",
+      "contact_data": {
+        "council": "Bass Coast Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Greg Box",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Brett Tessari",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Ron Bauer",
+        "contact": {
+          "postal_address": "PO Box 118",
+          "postal_suburb": "WONTHAGGI",
+          "postcode": "3995",
+          "street_address": "76 McBride Avenue",
+          "suburb": "WONTHAGGI",
+          "phone": "1300 BCOAST (226278)",
+          "email": "basscoast@basscoast.vic.gov.au",
+          "website": "www.basscoast.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.276143+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Baw Baw Shire Council",
+      "slug": "baw-baw-shire-council",
+      "contact_data": {
+        "council": "Baw Baw Shire Council",
+        "update_note": "CEO from 13July",
+        "ceo": {
+          "name": "Ms Tilla Buden",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Kate Wilson",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Suzanne Allen",
+        "contact": {
+          "postal_address": "PO Box 304",
+          "postal_suburb": "WARRAGUL",
+          "postcode": "3820",
+          "street_address": "33 Young Street",
+          "suburb": "DROUIN",
+          "phone": "5624 2411",
+          "email": "bawbaw@bawbawshire.vic.gov.au",
+          "website": "www.bawbawshire.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.276143+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Bayside City Council",
+      "slug": "bayside-city-council",
+      "contact_data": {
+        "council": "Bayside City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Matthew Cripps",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Debbie Taylor-Haynes",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Andrew Hockley",
+        "contact": {
+          "postal_address": "PO Box 27",
+          "postal_suburb": "SANDRINGHAM",
+          "postcode": "3191",
+          "street_address": "76 Royal Avenue",
+          "suburb": "SANDRINGHAM",
+          "phone": "9599 4444",
+          "email": "enquiries@bayside.vic.gov.au",
+          "website": "www.bayside.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.276143+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Benalla Rural City Council",
+      "slug": "benalla-rural-city-council",
+      "contact_data": {
+        "council": "Benalla Rural City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Peter Keane",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Bernie Hearn",
+          "title": "Mayor",
+          "term": "4th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Justin King",
+        "contact": {
+          "postal_address": "PO Box 227",
+          "postal_suburb": "BENALLA",
+          "postcode": "3671",
+          "street_address": "1 Bridge Street East",
+          "suburb": "BENALLA",
+          "phone": "5760 2600",
+          "email": "council@benalla.vic.gov.au",
+          "website": "www.benalla.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.276143+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Boroondara City Council",
+      "slug": "boroondara-city-council",
+      "contact_data": {
+        "council": "Boroondara City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Phillip Storer",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Wes Gault",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Shima Ibuki",
+        "contact": {
+          "postal_address": "Private Bag 1",
+          "postal_suburb": "CAMBERWELL",
+          "postcode": "3124",
+          "street_address": "8 Inglesby Road",
+          "suburb": "CAMBERWELL",
+          "phone": "9278 4444",
+          "email": "boroondara@boroondara.vic.gov.au",
+          "website": "www.boroondara.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.276143+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Brimbank City Council",
+      "slug": "brimbank-city-council",
+      "contact_data": {
+        "council": "Brimbank City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Fiona Blair",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Virginia Tachos",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Maria Kerr",
+        "contact": {
+          "postal_address": "PO Box 70",
+          "postal_suburb": "SUNSHINE",
+          "postcode": "3020",
+          "street_address": "Brimbank Community & Civic Centre, 301 Hampshire Rd",
+          "suburb": "SUNSHINE",
+          "phone": "9249 4000",
+          "email": "info@brimbank.vic.gov.au",
+          "website": "www.brimbank.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.276143+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Buloke Shire Council",
+      "slug": "buloke-shire-council",
+      "contact_data": {
+        "council": "Buloke Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Daniel McLoughlan",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Graeme Milne",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Bernadette Hogan",
+        "contact": {
+          "postal_address": "PO Box 1",
+          "postal_suburb": "WYCHEPROOF",
+          "postcode": "3527",
+          "street_address": "367 Broadway",
+          "suburb": "WYCHEPROOF",
+          "phone": "1300 520 520",
+          "email": "buloke@buloke.vic.gov.au",
+          "website": "www.buloke.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Campaspe Shire Council",
+      "slug": "campaspe-shire-council",
+      "contact_data": {
+        "council": "Campaspe Shire Council",
+        "update_note": "ICEO from 26Aug26",
+        "ceo": {
+          "name": "Mr Craig Niemann",
+          "title": "Interim Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Daniel Mackrell",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Tony Marwood",
+        "contact": {
+          "postal_address": "PO Box 35",
+          "postal_suburb": "ECHUCA",
+          "postcode": "3564",
+          "street_address": "Cnr Hare & Heygarth Streets",
+          "suburb": "ECHUCA",
+          "phone": "5481 2200",
+          "email": "shire@campaspe.vic.gov.au",
+          "website": "www.campaspe.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Cardinia Shire Council",
+      "slug": "cardinia-shire-council",
+      "contact_data": {
+        "council": "Cardinia Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr James Collins",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Brett Owen",
+          "title": "Mayor",
+          "term": "4th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Liz Roberts",
+        "contact": {
+          "postal_address": "PO Box 7",
+          "postal_suburb": "PAKENHAM",
+          "postcode": "3810",
+          "street_address": "20 Siding Avenue",
+          "suburb": "OFFICER",
+          "phone": "1300 787 624",
+          "email": "mail@cardinia.vic.gov.au",
+          "website": "www.cardinia.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Casey City Council",
+      "slug": "casey-city-council",
+      "contact_data": {
+        "council": "Casey City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Glenn Patterson",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Michelle Crowther",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Anthony Walter",
+        "contact": {
+          "postal_address": "PO Box 1000",
+          "postal_suburb": "NARRE WARREN",
+          "postcode": "3805",
+          "street_address": "Bunjil Place, Patrick Northeast Drive",
+          "suburb": "NARRE WARREN",
+          "phone": "9705 5200",
+          "email": "caseycc@casey.vic.gov.au",
+          "website": "www.casey.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Central Goldfields Shire Council",
+      "slug": "central-goldfields-shire-council",
+      "contact_data": {
+        "council": "Central Goldfields Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Peter Harriott",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Ben Green",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Anna de Villiers",
+        "contact": {
+          "postal_address": "PO Box 194",
+          "postal_suburb": "MARYBOROUGH",
+          "postcode": "3465",
+          "street_address": "12-22 Nolan Street",
+          "suburb": "MARYBOROUGH",
+          "phone": "5461 0610",
+          "email": "mail@cgoldshire.vic.gov.au",
+          "website": "www.centralgoldfields.com.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Colac Otway Shire Council",
+      "slug": "colac-otway-shire-council",
+      "contact_data": {
+        "council": "Colac Otway Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Andrew Tenni",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Jason Schram",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Phil Howard",
+        "contact": {
+          "postal_address": "PO Box 283",
+          "postal_suburb": "COLAC",
+          "postcode": "3250",
+          "street_address": "2-6 Rae Street",
+          "suburb": "COLAC",
+          "phone": "5232 9400",
+          "email": "inq@colacotway.vic.gov.au",
+          "website": "www.colacotway.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Corangamite Shire Council",
+      "slug": "corangamite-shire-council",
+      "contact_data": {
+        "council": "Corangamite Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr David Rae",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Kate Makin",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Laurie Hickey",
+        "contact": {
+          "postal_address": "PO Box 84",
+          "postal_suburb": "CAMPERDOWN",
+          "postcode": "3260",
+          "street_address": "181 Maniford Street",
+          "suburb": "CAMPERDOWN",
+          "phone": "5593 7100",
+          "email": "shire@corangamite.vic.gov.au",
+          "website": "www.corangamite.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Darebin City Council",
+      "slug": "darebin-city-council",
+      "contact_data": {
+        "council": "Darebin City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Anne Howard",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Emily Dimitriadis",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Matt Arturi",
+        "contact": {
+          "postal_address": "PO Box 91",
+          "postal_suburb": "PRESTON",
+          "postcode": "3072",
+          "street_address": "274 Gower Street",
+          "suburb": "PRESTON",
+          "phone": "8470 8888",
+          "email": "mailbox@darebin.vic.gov.au",
+          "website": "www.darebin.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "East Gippsland Shire Council",
+      "slug": "east-gippsland-shire-council",
+      "contact_data": {
+        "council": "East Gippsland Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Fiona Weigall",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Jodie Ashworth",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Tom Crook",
+        "contact": {
+          "postal_address": "PO Box 1618",
+          "postal_suburb": "BAIRNSDALE",
+          "postcode": "3875",
+          "street_address": "273 Main Street",
+          "suburb": "BAIRNSDALE",
+          "phone": "5153 9500",
+          "email": "feedback@egipps.vic.gov.au",
+          "website": "www.eastgippsland.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Frankston City Council",
+      "slug": "frankston-city-council",
+      "contact_data": {
+        "council": "Frankston City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Tennille Bradley",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Sue Baker",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Cherie Wanat",
+        "contact": {
+          "postal_address": "PO Box 490",
+          "postal_suburb": "FRANKSTON",
+          "postcode": "3199",
+          "street_address": "30 Davey Street",
+          "suburb": "FRANKSTON",
+          "phone": "1300 322 322",
+          "email": "info@frankston.vic.gov.au",
+          "website": "www.frankston.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Gannawarra Shire Council",
+      "slug": "gannawarra-shire-council",
+      "contact_data": {
+        "council": "Gannawarra Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Geoff Rollinson",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Garner Smith",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Ross Stanton",
+        "contact": {
+          "postal_address": "PO Box 287",
+          "postal_suburb": "KERANG",
+          "postcode": "3579",
+          "street_address": "47 Victoria Street",
+          "suburb": "KERANG",
+          "phone": "5450 9333",
+          "email": "council@gsc.vic.gov.au",
+          "website": "www.gsc.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.277666+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Glen Eira City Council",
+      "slug": "glen-eira-city-council",
+      "contact_data": {
+        "council": "Glen Eira City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Lucy Roffey",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Simone Zmood",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Li Zhang",
+        "contact": {
+          "postal_address": "PO Box 42",
+          "postal_suburb": "CAULFIELD SOUTH",
+          "postcode": "3162",
+          "street_address": "Cnr Glen Eira & Hawthorn Rds",
+          "suburb": "CAULFIELD SOUTH",
+          "phone": "9524 3333",
+          "email": "mail@gleneira.vic.gov.au",
+          "website": "www.gleneira.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Glenelg Shire Council",
+      "slug": "glenelg-shire-council",
+      "contact_data": {
+        "council": "Glenelg Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Helen Havercroft",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Karen Stephens",
+          "title": "Mayor",
+          "term": "5th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Matt Jowett",
+        "contact": {
+          "postal_address": "PO Box 152",
+          "postal_suburb": "PORTLAND",
+          "postcode": "3305",
+          "street_address": "71 Cliff Street",
+          "suburb": "PORTLAND",
+          "phone": "1300 453 635",
+          "email": "enquiry@glenelg.vic.gov.au",
+          "website": "www.glenelg.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Golden Plains Shire Council",
+      "slug": "golden-plains-shire-council",
+      "contact_data": {
+        "council": "Golden Plains Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Adam McSwain",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Owen Sharkey",
+          "title": "Mayor",
+          "term": "4th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Emma Robbins",
+        "contact": {
+          "postal_address": "PO Box 111",
+          "postal_suburb": "BANNOCKBURN",
+          "postcode": "3331",
+          "street_address": "2 Pope Street",
+          "suburb": "BANNOCKBURN",
+          "phone": "5220 7111",
+          "email": "enquiries@gplains.vic.gov.au",
+          "website": "www.goldenplains.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Greater Bendigo City Council",
+      "slug": "greater-bendigo-city-council",
+      "contact_data": {
+        "council": "Greater Bendigo City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Andrew Cooney",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Thomas Prince",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Karen Corr",
+        "contact": {
+          "postal_address": "PO Box 733",
+          "postal_suburb": "BENDIGO",
+          "postcode": "3552",
+          "street_address": "Galkangu–Bendigo GovHub, 189–229 Lyttleton Terrace",
+          "suburb": "BENDIGO",
+          "phone": "1300 002 642",
+          "email": "requests@bendigo.vic.gov.au",
+          "website": "www.bendigo.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Greater Dandenong City Council",
+      "slug": "greater-dandenong-city-council",
+      "contact_data": {
+        "council": "Greater Dandenong City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Jacqui Weatherill",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Sophie Tan",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Phillip Danh",
+        "contact": {
+          "postal_address": "PO Box 200",
+          "postal_suburb": "DANDENONG",
+          "postcode": "3175",
+          "street_address": "225 Lonsdale Street",
+          "suburb": "DANDENONG",
+          "phone": "8571 1000",
+          "email": "council@cgd.vic.gov.au",
+          "website": "www.greaterdandenong.com"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Greater Geelong City Council",
+      "slug": "greater-geelong-city-council",
+      "contact_data": {
+        "council": "Greater Geelong City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Ali Wastie",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Dr Stretch Kontelj",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2025 & 2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Ron Nelson",
+        "contact": {
+          "postal_address": "PO Box 104",
+          "postal_suburb": "GEELONG",
+          "postcode": "3220",
+          "street_address": "Wurriki Nyal, 137-149 Mercer Street",
+          "suburb": "GEELONG",
+          "phone": "5272 5272",
+          "email": "COGGRecords@geelongcity.vic.gov.au",
+          "website": "www.geelongaustralia.com.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Greater Shepparton City Council",
+      "slug": "greater-shepparton-city-council",
+      "contact_data": {
+        "council": "Greater Shepparton City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Fiona Le Gassick",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Shane Sali",
+          "title": "Mayor",
+          "term": "4th",
+          "term_years": "2025 & 2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Geoff Akers",
+        "contact": {
+          "postal_address": "Locked Bag 1000",
+          "postal_suburb": "SHEPPARTON",
+          "postcode": "3632",
+          "street_address": "90 Welsford Street",
+          "suburb": "SHEPPARTON",
+          "phone": "5832 9700",
+          "email": "council@shepparton.vic.gov.au",
+          "website": "greatershepparton.com.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Hepburn Shire Council",
+      "slug": "hepburn-shire-council",
+      "contact_data": {
+        "council": "Hepburn Shire Council",
+        "update_note": "ICEO from13Aug",
+        "ceo": {
+          "name": "Ms Janet Dore",
+          "title": "Interim Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Tony Clark",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Shirley Cornish",
+        "contact": {
+          "postal_address": "PO Box 21",
+          "postal_suburb": "DAYLESFORD",
+          "postcode": "3460",
+          "street_address": "76 Vincent Street",
+          "suburb": "DAYLESFORD",
+          "phone": "5348 2306",
+          "email": "shire@hepburn.vic.gov.au",
+          "website": "www.hepburn.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Hindmarsh Shire Council",
+      "slug": "hindmarsh-shire-council",
+      "contact_data": {
+        "council": "Hindmarsh Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Monica Revell",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Ron Ismay",
+          "title": "Mayor",
+          "term": "5th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Rosie Barker",
+        "contact": {
+          "postal_address": "PO Box 250",
+          "postal_suburb": "NHILL",
+          "postcode": "3418",
+          "street_address": "92 Nelson Street",
+          "suburb": "NHILL",
+          "phone": "5391 4444",
+          "email": "info@hindmarsh.vic.gov.au",
+          "website": "www.hindmarsh.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Hobsons Bay City Council",
+      "slug": "hobsons-bay-city-council",
+      "contact_data": {
+        "council": "Hobsons Bay City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Phu Nguyen",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Diana Grima",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Lisa Bentley",
+        "contact": {
+          "postal_address": "PO Box 21",
+          "postal_suburb": "ALTONA",
+          "postcode": "3018",
+          "street_address": "115 Civic Parade",
+          "suburb": "ALTONA",
+          "phone": "9932 1000",
+          "email": "customerservice@hobsonsbay.vic.gov.au",
+          "website": "www.hobsonsbay.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Horsham Rural City Council",
+      "slug": "horsham-rural-city-council",
+      "contact_data": {
+        "council": "Horsham Rural City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Gail Gatt",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Brian Klowss",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Rebecca Sluggett",
+        "contact": {
+          "postal_address": "PO Box 511",
+          "postal_suburb": "HORSHAM",
+          "postcode": "3402",
+          "street_address": "Civic Centre, Roberts Avenue",
+          "suburb": "HORSHAM",
+          "phone": "5382 9777",
+          "email": "council@hrcc.vic.gov.au",
+          "website": "www.hrcc.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Hume City Council",
+      "slug": "hume-city-council",
+      "contact_data": {
+        "council": "Hume City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Sheena Frost",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Carly Moore",
+          "title": "Mayor",
+          "term": "4th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Ally Watson",
+        "contact": {
+          "postal_address": "PO Box 119",
+          "postal_suburb": "DALLAS",
+          "postcode": "3047",
+          "street_address": "1079 Pascoe Vale Road",
+          "suburb": "BROADMEADOWS",
+          "phone": "9205 2200",
+          "email": "contactus@hume.vic.gov.au",
+          "website": "www.hume.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.279707+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Indigo Shire Council",
+      "slug": "indigo-shire-council",
+      "contact_data": {
+        "council": "Indigo Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Trevor Ierino",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Sophie Price",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2025 & 2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Jane Dowsley",
+        "contact": {
+          "postal_address": "PO Box 28",
+          "postal_suburb": "BEECHWORTH",
+          "postcode": "3747",
+          "street_address": "2 Kurrajong Way",
+          "suburb": "BEECHWORTH",
+          "phone": "5728 8000",
+          "email": "info@indigoshire.vic.gov.au",
+          "website": "www.indigoshire.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Kingston City Council",
+      "slug": "kingston-city-council",
+      "contact_data": {
+        "council": "Kingston City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Peter Bean",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Georgina Oxley",
+          "title": "Mayor",
+          "term": "4th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Sarah O’Donnell",
+        "contact": {
+          "postal_address": "PO Box 1000",
+          "postal_suburb": "MENTONE",
+          "postcode": "3194",
+          "street_address": "1230 Nepean Highway",
+          "suburb": "CHELTENHAM",
+          "phone": "1300 653 356",
+          "email": "info@kingston.vic.gov.au",
+          "website": "www.kingston.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Knox City Council",
+      "slug": "knox-city-council",
+      "contact_data": {
+        "council": "Knox City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Bruce Dobson",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Paige Kennett",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Chris Duncan",
+        "contact": {
+          "postal_address": "511 Burwood Highway",
+          "postal_suburb": "WANTIRNA SOUTH",
+          "postcode": "3152",
+          "street_address": "511 Burwood Highway",
+          "suburb": "WANTIRNA SOUTH",
+          "phone": "9298 8000",
+          "email": "knoxcc@knox.vic.gov.au",
+          "website": "www.knox.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Latrobe City Council",
+      "slug": "latrobe-city-council",
+      "contact_data": {
+        "council": "Latrobe City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Steven Piasente",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Sharon Gibson",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Dale Harriman",
+        "contact": {
+          "postal_address": "PO Box 264",
+          "postal_suburb": "MORWELL",
+          "postcode": "3840",
+          "street_address": "141 Commercial Road",
+          "suburb": "MORWELL",
+          "phone": "1300 367 700",
+          "email": "latrobe@latrobe.vic.gov.au",
+          "website": "www.latrobe.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Loddon Shire Council",
+      "slug": "loddon-shire-council",
+      "contact_data": {
+        "council": "Loddon Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Lincoln Fitzgerald",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Dan Straub",
+          "title": "Mayor",
+          "term": "4th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "",
+        "contact": {
+          "postal_address": "PO Box 21",
+          "postal_suburb": "WEDDERBURN",
+          "postcode": "3518",
+          "street_address": "41 High Street",
+          "suburb": "WEDDERBURN",
+          "phone": "5494 1200",
+          "email": "loddon@loddon.vic.gov.au",
+          "website": "www.loddon.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Macedon Ranges Shire Council",
+      "slug": "macedon-ranges-shire-council",
+      "contact_data": {
+        "council": "Macedon Ranges Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Bernie O'Sullivan",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Cassy Borthwick",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Daniel Young",
+        "contact": {
+          "postal_address": "PO Box 151",
+          "postal_suburb": "KYNETON",
+          "postcode": "3444",
+          "street_address": "129 Mollison Street",
+          "suburb": "KYNETON",
+          "phone": "5422 0333",
+          "email": "mrsc@mrsc.vic.gov.au",
+          "website": "www.mrsc.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Manningham City Council",
+      "slug": "manningham-city-council",
+      "contact_data": {
+        "council": "Manningham City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Andrew Day",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Jim Grivas",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Deirdre Diamante",
+        "contact": {
+          "postal_address": "PO Box 1",
+          "postal_suburb": "DONCASTER",
+          "postcode": "3108",
+          "street_address": "699 Doncaster Road",
+          "suburb": "DONCASTER",
+          "phone": "9840 9333",
+          "email": "manningham@manningham.vic.gov.au",
+          "website": "www.manningham.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Mansfield Shire Council",
+      "slug": "mansfield-shire-council",
+      "contact_data": {
+        "council": "Mansfield Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Kirsten Alexander",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Steve Rabie",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr James Tehan",
+        "contact": {
+          "postal_address": "Private Bag 1000",
+          "postal_suburb": "MANSFIELD",
+          "postcode": "3724",
+          "street_address": "33 Highett Street",
+          "suburb": "MANSFIELD",
+          "phone": "5775 8555",
+          "email": "council@mansfield.vic.gov.au",
+          "website": "www.mansfield.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Maribyrnong City Council",
+      "slug": "maribyrnong-city-council",
+      "contact_data": {
+        "council": "Maribyrnong City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Celia Haddock",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Mohamed Semra",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Samantha Meredith",
+        "contact": {
+          "postal_address": "PO Box 58",
+          "postal_suburb": "WEST FOOTSCRAY",
+          "postcode": "3012",
+          "street_address": "61 Napier St",
+          "suburb": "FOOTSCRAY",
+          "phone": "9688 0200",
+          "email": "email@maribyrnong.vic.gov.au",
+          "website": "www.maribyrnong.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Maroondah City Council",
+      "slug": "maroondah-city-council",
+      "contact_data": {
+        "council": "Maroondah City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Steve Kozlowski",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Linda Hancock",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Paul Macdonald",
+        "contact": {
+          "postal_address": "PO Box 156",
+          "postal_suburb": "RINGWOOD",
+          "postcode": "3134",
+          "street_address": "Realm, 179 Maroondah Highway",
+          "suburb": "RINGWOOD",
+          "phone": "1300 882 233",
+          "email": "maroondah@maroondah.vic.gov.au",
+          "website": "www.maroondah.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Melbourne City Council",
+      "slug": "melbourne-city-council",
+      "contact_data": {
+        "council": "Melbourne City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Alison Leighton",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Nicholas Reece",
+          "title": "Lord Mayor",
+          "term": "2nd",
+          "term_years": "2024-28",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Roshena Campbell",
+        "contact": {
+          "postal_address": "GPO Box 1603",
+          "postal_suburb": "MELBOURNE",
+          "postcode": "3001",
+          "street_address": "Town Hall, 120 Swanston St",
+          "suburb": "MELBOURNE",
+          "phone": "9658 9658",
+          "email": "enquiries@melbourne.vic.gov.au",
+          "website": "www.melbourne.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Melton City Council",
+      "slug": "melton-city-council",
+      "contact_data": {
+        "council": "Melton City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Roslyn Wai",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Lara Carli",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Phillip Zada",
+        "contact": {
+          "postal_address": "PO Box 21",
+          "postal_suburb": "MELTON",
+          "postcode": "3337",
+          "street_address": "232 High Street",
+          "suburb": "MELTON",
+          "phone": "9747 7200",
+          "email": "csu@melton.vic.gov.au",
+          "website": "www.melton.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Merri-bek City Council",
+      "slug": "merri-bek-city-council",
+      "contact_data": {
+        "council": "Merri-bek City Council",
+        "update_note": "CEO from 15Jun26",
+        "ceo": {
+          "name": "Ms Kate McCaughey",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Nat Abboud",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Dr Jay Iwasaki",
+        "contact": {
+          "postal_address": "Locked Bag 10",
+          "postal_suburb": "BRUNSWICK",
+          "postcode": "3056",
+          "street_address": "90 Bell Street",
+          "suburb": "COBURG",
+          "phone": "9240 1111",
+          "email": "info@merri-bek.vic.gov.au",
+          "website": "www.merri-bek.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.281713+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Mildura Rural City Council",
+      "slug": "mildura-rural-city-council",
+      "contact_data": {
+        "council": "Mildura Rural City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Martin Hawson",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Ali Cupper",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Helen Healy",
+        "contact": {
+          "postal_address": "PO Box 105",
+          "postal_suburb": "MILDURA",
+          "postcode": "3502",
+          "street_address": "108-116 Madden Avenue",
+          "suburb": "MILDURA",
+          "phone": "5018 8100",
+          "email": "mrcc@mildura.vic.gov.au",
+          "website": "www.mildura.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Mitchell Shire Council",
+      "slug": "mitchell-shire-council",
+      "contact_data": {
+        "council": "Mitchell Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Mary Agostino",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr John Dougall",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Timothy Hanson",
+        "contact": {
+          "postal_address": "113 High Street",
+          "postal_suburb": "BROADFORD",
+          "postcode": "3658",
+          "street_address": "113 High Street",
+          "suburb": "BROADFORD",
+          "phone": "5734 6200",
+          "email": "mitchell@mitchellshire.vic.gov.au",
+          "website": "www.mitchellshire.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Moira Shire Council",
+      "slug": "moira-shire-council",
+      "contact_data": {
+        "council": "Moira Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Matthew Morgan",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Dr Graeme Emonson PSM",
+          "title": "Administrator (Chair)",
+          "term": "",
+          "term_years": "",
+          "is_administrator": true
+        },
+        "deputy_mayor": "",
+        "contact": {
+          "postal_address": "PO Box 578",
+          "postal_suburb": "COBRAM",
+          "postcode": "3643",
+          "street_address": "44 Station Street",
+          "suburb": "COBRAM",
+          "phone": "5871 9222",
+          "email": "info@moira.vic.gov.au",
+          "website": "www.moira.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Monash City Council",
+      "slug": "monash-city-council",
+      "contact_data": {
+        "council": "Monash City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Dr Andi Diamond",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Stuart James",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Elisha Lee",
+        "contact": {
+          "postal_address": "PO Box 1",
+          "postal_suburb": "GLEN WAVERLEY",
+          "postcode": "3150",
+          "street_address": "293 Springvale Road",
+          "suburb": "GLEN WAVERLEY",
+          "phone": "9518 3555",
+          "email": "mail@monash.vic.gov.au",
+          "website": "www.monash.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Moonee Valley City Council",
+      "slug": "moonee-valley-city-council",
+      "contact_data": {
+        "council": "Moonee Valley City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Helen Sui",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Rose Iser",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Phil Burn",
+        "contact": {
+          "postal_address": "PO Box 126",
+          "postal_suburb": "MOONEE PONDS",
+          "postcode": "3039",
+          "street_address": "9 Kellaway Avenue",
+          "suburb": "MOONEE PONDS",
+          "phone": "9243 8888",
+          "email": "council@mvcc.vic.gov.au",
+          "website": "www.mvcc.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Moorabool Shire Council",
+      "slug": "moorabool-shire-council",
+      "contact_data": {
+        "council": "Moorabool Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Derek Madden",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Steve Venditti-Taylor",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Jarrod Bingham",
+        "contact": {
+          "postal_address": "PO Box 18",
+          "postal_suburb": "BALLAN",
+          "postcode": "3342",
+          "street_address": "15 Stead Street",
+          "suburb": "BALLAN",
+          "phone": "5366 7100",
+          "email": "info@moorabool.vic.gov.au",
+          "website": "www.moorabool.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Mornington Peninsula Shire Council",
+      "slug": "mornington-peninsula-shire-council",
+      "contact_data": {
+        "council": "Mornington Peninsula Shire Council",
+        "update_note": "Mayor new from 16Jun26",
+        "ceo": {
+          "name": "Mr Mark Stoermer",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Stephen Batty",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Paul Pingiaro",
+        "contact": {
+          "postal_address": "Private Bag 1000",
+          "postal_suburb": "ROSEBUD",
+          "postcode": "3939",
+          "street_address": "90 Besgrove Street",
+          "suburb": "ROSEBUD",
+          "phone": "1300 850 600",
+          "email": "customerservice@mornpen.vic.gov.au",
+          "website": "www.mornpen.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Mount Alexander Shire Council",
+      "slug": "mount-alexander-shire-council",
+      "contact_data": {
+        "council": "Mount Alexander Shire Council",
+        "update_note": "CEO from 20July",
+        "ceo": {
+          "name": "Mr Michael Annear",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Toby Heydon",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Matthew Driscoll",
+        "contact": {
+          "postal_address": "PO Box 185",
+          "postal_suburb": "CASTLEMAINE",
+          "postcode": "3450",
+          "street_address": "Cnr Lyttleton & Lloyd Streets",
+          "suburb": "CASTLEMAINE",
+          "phone": "5471 1700",
+          "email": "info@mountalexander.vic.gov.au",
+          "website": "www.mountalexander.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Moyne Shire Council",
+      "slug": "moyne-shire-council",
+      "contact_data": {
+        "council": "Moyne Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Mark Eversteyn",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Jordan Lockett",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Myra Murrihy",
+        "contact": {
+          "postal_address": "PO Box 51",
+          "postal_suburb": "PORT FAIRY",
+          "postcode": "3284",
+          "street_address": "Princes Street",
+          "suburb": "PORT FAIRY",
+          "phone": "5568 0555",
+          "email": "moyne@moyne.vic.gov.au",
+          "website": "www.moyne.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Murrindindi Shire Council",
+      "slug": "murrindindi-shire-council",
+      "contact_data": {
+        "council": "Murrindindi Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Livia Bonazzi",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Damien Gallagher",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Anita Carr",
+        "contact": {
+          "postal_address": "PO Box 138",
+          "postal_suburb": "ALEXANDRA",
+          "postcode": "3714",
+          "street_address": "28 Perkins Street",
+          "suburb": "ALEXANDRA",
+          "phone": "5772 0333",
+          "email": "msc@murrindindi.vic.gov.au",
+          "website": "www.murrindindi.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.283720+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Nillumbik Shire Council",
+      "slug": "nillumbik-shire-council",
+      "contact_data": {
+        "council": "Nillumbik Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Carl Cowie",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Naomi Joiner",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Kate McKay",
+        "contact": {
+          "postal_address": "PO Box 476",
+          "postal_suburb": "GREENSBOROUGH",
+          "postcode": "3088",
+          "street_address": "Civic Drive",
+          "suburb": "GREENSBOROUGH",
+          "phone": "9433 3111",
+          "email": "nillumbik@nillumbik.vic.gov.au",
+          "website": "www.nillumbik.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.285727+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Northern Grampians Shire Council",
+      "slug": "northern-grampians-shire-council",
+      "contact_data": {
+        "council": "Northern Grampians Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Brent McAlister",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Karen Hyslop",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Justine Hide",
+        "contact": {
+          "postal_address": "PO Box 580",
+          "postal_suburb": "STAWELL",
+          "postcode": "3380",
+          "street_address": "59-69 Main Street",
+          "suburb": "STAWELL",
+          "phone": "5358 8700",
+          "email": "ngshire@ngshire.vic.gov.au",
+          "website": "www.ngshire.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.285727+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Port Phillip City Council",
+      "slug": "port-phillip-city-council",
+      "contact_data": {
+        "council": "Port Phillip City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Chris Carroll",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Alex Makin",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Bryan Mears",
+        "contact": {
+          "postal_address": "Private Bag 3",
+          "postal_suburb": "ST KILDA",
+          "postcode": "3182",
+          "street_address": "99a Carlisle Street",
+          "suburb": "ST KILDA",
+          "phone": "9209 6777",
+          "email": "NOGENERALEMAIL",
+          "website": "www.portphillip.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.285727+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Pyrenees Shire Council",
+      "slug": "pyrenees-shire-council",
+      "contact_data": {
+        "council": "Pyrenees Shire Council",
+        "update_note": "ICEO from3Aug",
+        "ceo": {
+          "name": "Ms Sally Jones",
+          "title": "Interim Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Damian Ferrari",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Rebecca Wardlaw",
+        "contact": {
+          "postal_address": "5 Lawrence Street",
+          "postal_suburb": "BEAUFORT",
+          "postcode": "3373",
+          "street_address": "5 Lawrence Street",
+          "suburb": "BEAUFORT",
+          "phone": "5349 1100",
+          "email": "pyrenees@pyrenees.vic.gov.au",
+          "website": "www.pyrenees.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.285727+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Queenscliffe Borough Council",
+      "slug": "queenscliffe-borough-council"
+    },
+    {
+      "name": "South Gippsland Shire Council",
+      "slug": "south-gippsland-shire-council",
+      "contact_data": {
+        "council": "South Gippsland Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Allison Jones",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Nathan Hersey",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Brad Snell",
+        "contact": {
+          "postal_address": "Private Bag 4",
+          "postal_suburb": "LEONGATHA",
+          "postcode": "3953",
+          "street_address": "9 Smith Street",
+          "suburb": "LEONGATHA",
+          "phone": "5662 9200",
+          "email": "council@southgippsland.vic.gov.au",
+          "website": "www.southgippsland.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.285727+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Southern Grampians Shire Council",
+      "slug": "southern-grampians-shire-council",
+      "contact_data": {
+        "council": "Southern Grampians Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Tony Doyle",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Dennis Heslin",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Helen Henry",
+        "contact": {
+          "postal_address": "Locked Bag 685",
+          "postal_suburb": "HAMILTON",
+          "postcode": "3300",
+          "street_address": "111 Brown Street",
+          "suburb": "HAMILTON",
+          "phone": "5573 0444",
+          "email": "council@sthgrampians.vic.gov.au",
+          "website": "www.sthgrampians.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.285727+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Stonnington City Council",
+      "slug": "stonnington-city-council",
+      "contact_data": {
+        "council": "Stonnington City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Dale Dickson",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Melina Sehr",
+          "title": "Mayor",
+          "term": "6th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Samantha Choudhury",
+        "contact": {
+          "postal_address": "PO Box 58",
+          "postal_suburb": "MALVERN",
+          "postcode": "3144",
+          "street_address": "311 Glenferrie Road",
+          "suburb": "MALVERN",
+          "phone": "8290 1333",
+          "email": "council@stonnington.vic.gov.au",
+          "website": "www.stonnington.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.285727+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Strathbogie Shire Council",
+      "slug": "strathbogie-shire-council",
+      "contact_data": {
+        "council": "Strathbogie Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Rachelle Quattrocchi",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Scott Jeffery",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Claire Ewart-Kennedy",
+        "contact": {
+          "postal_address": "PO Box 177",
+          "postal_suburb": "EUROA",
+          "postcode": "3666",
+          "street_address": "109A Binney Street",
+          "suburb": "EUROA",
+          "phone": "5795 0000",
+          "email": "info@strathbogie.vic.gov.au",
+          "website": "www.strathbogie.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.285727+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Surf Coast Shire Council",
+      "slug": "surf-coast-shire-council",
+      "contact_data": {
+        "council": "Surf Coast Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Robyn Seymour",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Libby Stapleton",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Tony Phelps",
+        "contact": {
+          "postal_address": "PO Box 350",
+          "postal_suburb": "TORQUAY",
+          "postcode": "3228",
+          "street_address": "1 Merrijig Drive",
+          "suburb": "TORQUAY",
+          "phone": "5261 0600",
+          "email": "info@surfcoast.vic.gov.au",
+          "website": "www.surfcoast.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.285727+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Swan Hill Rural City Council",
+      "slug": "swan-hill-rural-city-council",
+      "contact_data": {
+        "council": "Swan Hill Rural City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Scott Barber",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Stuart King",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Terry Jennings",
+        "contact": {
+          "postal_address": "PO Box 488",
+          "postal_suburb": "SWAN HILL",
+          "postcode": "3585",
+          "street_address": "45 Splatt Street",
+          "suburb": "SWAN HILL",
+          "phone": "5036 2333",
+          "email": "council@swanhill.vic.gov.au",
+          "website": "www.swanhill.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Towong Shire Council",
+      "slug": "towong-shire-council",
+      "contact_data": {
+        "council": "Towong Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Juliana Phelps",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Peter Tolsher",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Denise Anderson",
+        "contact": {
+          "postal_address": "PO Box 55",
+          "postal_suburb": "TALLANGATTA",
+          "postcode": "3700",
+          "street_address": "32 Towong Street",
+          "suburb": "TALLANGATTA",
+          "phone": "02 6071 5100",
+          "email": "info@towong.vic.gov.au",
+          "website": "www.towong.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Wangaratta Rural City Council",
+      "slug": "wangaratta-rural-city-council",
+      "contact_data": {
+        "council": "Wangaratta Rural City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Matt Nelson",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Irene Grant",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Harvey Benton",
+        "contact": {
+          "postal_address": "PO Box 238",
+          "postal_suburb": "WANGARATTA",
+          "postcode": "3676",
+          "street_address": "Cnr Ford & Ovens Streets",
+          "suburb": "WANGARATTA",
+          "phone": "5722 0888",
+          "email": "council@wangaratta.vic.gov.au",
+          "website": "www.wangaratta.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Warrnambool City Council",
+      "slug": "warrnambool-city-council",
+      "contact_data": {
+        "council": "Warrnambool City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Andrew Mason",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Ben Blain",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Matt Walsh",
+        "contact": {
+          "postal_address": "PO Box 198",
+          "postal_suburb": "WARRNAMBOOL",
+          "postcode": "3280",
+          "street_address": "25 Liebig Street",
+          "suburb": "WARRNAMBOOL",
+          "phone": "5559 4800",
+          "email": "wbool_city@warrnambool.vic.gov.au",
+          "website": "www.warrnambool.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Wellington Shire Council",
+      "slug": "wellington-shire-council",
+      "contact_data": {
+        "council": "Wellington Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr David Morcom",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Cindy Madeley",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Liz Foat",
+        "contact": {
+          "postal_address": "PO Box 506",
+          "postal_suburb": "SALE",
+          "postcode": "3850",
+          "street_address": "18 Desailly Street",
+          "suburb": "SALE",
+          "phone": "1300 366 244",
+          "email": "enquiries@wellington.vic.gov.au",
+          "website": "www.wellington.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "West Wimmera Shire Council",
+      "slug": "west-wimmera-shire-council",
+      "contact_data": {
+        "council": "West Wimmera Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr David Bezuidenhout",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Tim Meyer",
+          "title": "Mayor",
+          "term": "4th",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Helen Hobbs",
+        "contact": {
+          "postal_address": "PO Box 201",
+          "postal_suburb": "EDENHOPE",
+          "postcode": "3318",
+          "street_address": "49 Elizabeth Street",
+          "suburb": "EDENHOPE",
+          "phone": "13 99 72 / 5585 9900",
+          "email": "council@westwimmera.vic.gov.au",
+          "website": "www.westwimmera.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Whitehorse City Council",
+      "slug": "whitehorse-city-council",
+      "contact_data": {
+        "council": "Whitehorse City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Simon McMillan",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Kirsten Langford",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Kieran Simpson",
+        "contact": {
+          "postal_address": "Locked Bag 2",
+          "postal_suburb": "NUNAWADING",
+          "postcode": "3131",
+          "street_address": "379-399 Whitehorse Road",
+          "suburb": "NUNAWADING",
+          "phone": "9262 6333",
+          "email": "customer.service@whitehorse.vic.gov.au",
+          "website": "www.whitehorse.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Whittlesea City Council",
+      "slug": "whittlesea-city-council",
+      "contact_data": {
+        "council": "Whittlesea City Council",
+        "update_note": "CEO from 1Seot",
+        "ceo": {
+          "name": "Mr Dan Hogan",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Lawrie Cox",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Blair Colwell",
+        "contact": {
+          "postal_address": "Locked Bag 1",
+          "postal_suburb": "BUNDOORA MDC",
+          "postcode": "3083",
+          "street_address": "25 Ferres Boulevard",
+          "suburb": "SOUTH MORANG",
+          "phone": "9217 2170",
+          "email": "info@whittlesea.vic.gov.au",
+          "website": "www.whittlesea.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Wodonga City Council",
+      "slug": "wodonga-city-council",
+      "contact_data": {
+        "council": "Wodonga City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Mr Matt Hyde",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Michael Gobel",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Libby Hall",
+        "contact": {
+          "postal_address": "PO Box 923",
+          "postal_suburb": "WODONGA",
+          "postcode": "3689",
+          "street_address": "104 Hovell Street",
+          "suburb": "WODONGA",
+          "phone": "02 6022 9300",
+          "email": "info@wodonga.vic.gov.au",
+          "website": "www.wodonga.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Wyndham City Council",
+      "slug": "wyndham-city-council",
+      "contact_data": {
+        "council": "Wyndham City Council",
+        "update_note": "New Mayor&Dep 23Mar",
+        "ceo": {
+          "name": "Mr Stephen Wall",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Mia Shaw",
+          "title": "Mayor",
+          "term": "3rd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Jasmine Hill",
+        "contact": {
+          "postal_address": "PO Box 197",
+          "postal_suburb": "WERRIBEE",
+          "postcode": "3030",
+          "street_address": "45 Princes Highway",
+          "suburb": "WERRIBEE",
+          "phone": "1300 023 411",
+          "email": "mail@wyndham.vic.gov.au",
+          "website": "www.wyndham.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Yarra City Council",
+      "slug": "yarra-city-council",
+      "contact_data": {
+        "council": "Yarra City Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Sue Wilkinson",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Stephen Jolly",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Sharon Harrison",
+        "contact": {
+          "postal_address": "PO Box 168",
+          "postal_suburb": "RICHMOND",
+          "postcode": "3121",
+          "street_address": "333 Bridge Road",
+          "suburb": "RICHMOND",
+          "phone": "9205 5555",
+          "email": "info@yarracity.vic.gov.au",
+          "website": "www.yarracity.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Yarra Ranges Shire Council",
+      "slug": "yarra-ranges-shire-council",
+      "contact_data": {
+        "council": "Yarra Ranges Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Tammi Rose",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Richard Higgins",
+          "title": "Mayor",
+          "term": "2nd",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Gareth Ward",
+        "contact": {
+          "postal_address": "PO Box 105",
+          "postal_suburb": "LILYDALE",
+          "postcode": "3140",
+          "street_address": "15 Anderson Street",
+          "suburb": "LILYDALE",
+          "phone": "1300 368 333",
+          "email": "mail@yarraranges.vic.gov.au",
+          "website": "www.yarraranges.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    },
+    {
+      "name": "Yarriambiack Shire Council",
+      "slug": "yarriambiack-shire-council",
+      "contact_data": {
+        "council": "Yarriambiack Shire Council",
+        "update_note": "",
+        "ceo": {
+          "name": "Ms Tammy Smith",
+          "title": "Chief Executive Officer"
+        },
+        "mayor": {
+          "name": "Cr Andrew Mclean",
+          "title": "Mayor",
+          "term": "1st",
+          "term_years": "2026",
+          "is_administrator": false
+        },
+        "deputy_mayor": "Cr Corinne Heintze",
+        "contact": {
+          "postal_address": "PO Box 243",
+          "postal_suburb": "WARRACKNABEAL",
+          "postcode": "3393",
+          "street_address": "34 Lyle Street",
+          "suburb": "WARRACKNABEAL",
+          "phone": "5398 0100",
+          "email": "info@yarriambiack.vic.gov.au",
+          "website": "yarriambiack.vic.gov.au"
+        },
+        "fetched_at": "2026-09-06T07:36:20.287732+00:00",
+        "source_url": "https://www.vic.gov.au/local-government-contacts-and-information"
+      }
+    }
+  ],
+  "contacts_summary": {
+    "councils_with_contacts": 78,
+    "with_email": 79
+  }
+}
